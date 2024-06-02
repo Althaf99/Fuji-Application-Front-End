@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useCreateEmployee = () => {
   const QueryClient = useQueryClient();
-  const url = "http://localhost:8080/employee";
+  const url = "http://3.110.213.39:8080/employee";
 
   return useMutation(
     async (obj) => await axios.post(url, obj),

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useCreateDeliveryNote = () => {
   const QueryClient = useQueryClient();
-  const url = "http://3.110.213.39:8080/deliveryNote";
+  const url = "http://43.204.145.48:8080/deliveryNote";
 
   return useMutation(
     async (obj) => await axios.post(url, obj),

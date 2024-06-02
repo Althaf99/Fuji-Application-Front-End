@@ -4,7 +4,7 @@ import axios from "axios";
 const useRequestNumbers = () => {
   const fetchColors = async () => {
     try {
-      const data = await axios.get("http://3.110.213.39:8080/requestNumbers");
+      const data = await axios.get("http://43.204.145.48:8080/requestNumbers");
       return data?.data;
     } catch (e) {
       return Promise.reject(e);

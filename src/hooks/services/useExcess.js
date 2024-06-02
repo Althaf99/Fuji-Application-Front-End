@@ -21,7 +21,7 @@ const useExcess = ({ itemName, itemColor, startDate, endDate }) => {
 
     try {
       const data = await axios.get(
-        `http://3.110.213.39:8080/excess?${query.toString()}`
+        `http://43.204.145.48:8080/excess?${query.toString()}`
       );
 
       return data.data;

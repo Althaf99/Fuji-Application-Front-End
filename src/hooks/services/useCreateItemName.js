@@ -3,7 +3,8 @@ import axios from "axios";
 
 const useCreateItemName = () => {
   const QueryClient = useQueryClient();
-  const projectUrl = "http://43.204.145.48:8080/itemNames";
+  const projectUrl =
+    "http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080/itemNames";
 
   return useMutation(
     async (obj) => await axios.post(projectUrl, obj),

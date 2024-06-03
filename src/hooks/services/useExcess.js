@@ -21,7 +21,7 @@ const useExcess = ({ itemName, itemColor, startDate, endDate }) => {
 
     try {
       const data = await axios.get(
-        `http://43.204.145.48:8080/excess?${query.toString()}`
+        `http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080/excess?${query.toString()}`
       );
 
       return data.data;

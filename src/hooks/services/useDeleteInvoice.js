@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useDeleteInvoice = ({ id }) => {
   const QueryClient = useQueryClient();
-  const deleteInvoiceItem = `http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080/invoice/${id}`;
+  const deleteInvoiceItem = `http://43.204.142.79:8080/invoice/${id}`;
 
   return useMutation(
     (obj) =>

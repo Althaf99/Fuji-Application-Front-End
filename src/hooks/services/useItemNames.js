@@ -4,9 +4,7 @@ import axios from "axios";
 const useItemNames = (onSuccess, onError) => {
   const fetchItemNames = async () => {
     try {
-      const data = await axios.get(
-        "http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080/itemNames"
-      );
+      const data = await axios.get("http://43.204.142.79:8080/itemNames");
       return data?.data;
     } catch (e) {
       return Promise.reject(e);

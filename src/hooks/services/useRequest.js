@@ -28,7 +28,7 @@ const useRequest = ({
     }
     try {
       const data = await axios.get(
-        `http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080/purchaseOrder?${query.toString()}`
+        `http://43.204.142.79:8080/purchaseOrder?${query.toString()}`
       );
 
       return data.data;

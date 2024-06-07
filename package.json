@@ -2,7 +2,7 @@
   "name": "fujicraft",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-13-233-90-251.ap-south-1.compute.amazonaws.com:8080",
+  "proxy": "http://43.204.142.79:8080",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",

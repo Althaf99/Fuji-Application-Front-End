@@ -36,7 +36,7 @@ const useInvoice = ({
     }
     try {
       const data = await axios.get(
-        `http://43.204.142.79:8080/invoiceList?${query.toString()}`
+        `http://43.204.142.79:443/invoiceList?${query.toString()}`
       );
 
       return data.data;

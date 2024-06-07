@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useDeleteExcess = ({ id }) => {
   const QueryClient = useQueryClient();
-  const deleteInvoiceItem = `http://43.204.142.79:8080/excess/${id}`;
+  const deleteInvoiceItem = `http://43.204.142.79:443/excess/${id}`;
 
   return useMutation(
     (obj) =>

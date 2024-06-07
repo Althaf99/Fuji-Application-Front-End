@@ -28,7 +28,7 @@ const useRequest = ({
     }
     try {
       const data = await axios.get(
-        `http://43.204.142.79:8080/purchaseOrder?${query.toString()}`
+        `http://43.204.142.79:443/purchaseOrder?${query.toString()}`
       );
 
       return data.data;

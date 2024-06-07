@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useDeletDeliveryNote = ({ id }) => {
   const QueryClient = useQueryClient();
-  const deleteDeliveryNoteItem = `http://43.204.142.79:8080/deliveryNote/${id}`;
+  const deleteDeliveryNoteItem = `http://43.204.142.79:443/deliveryNote/${id}`;
 
   return useMutation(
     (obj) =>

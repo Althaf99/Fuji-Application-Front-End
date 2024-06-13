@@ -4,7 +4,7 @@ import axios from "axios";
 const useCommon = () => {
   const fetchCommon = async () => {
     try {
-      const data = await axios.get("http://43.204.142.79:443/common");
+      const data = await axios.get("http://13.201.133.175:8080/common");
       return data?.data[0];
     } catch (e) {
       return Promise.reject(e);

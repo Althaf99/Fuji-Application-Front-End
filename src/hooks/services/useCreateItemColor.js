@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useCreateItemColor = () => {
   const QueryClient = useQueryClient();
-  const projectUrl = "http://43.204.142.79:443/itemColors";
+  const projectUrl = "http://13.201.133.175:8080/itemColors";
 
   return useMutation(
     async (obj) => await axios.post(projectUrl, obj),

@@ -18,7 +18,7 @@ const useDeliveryNote = ({ itemName, itemColor, startDate, endDate }) => {
     }
     try {
       const data = await axios.get(
-        `http://43.204.142.79:443/deliveryNote?${query.toString()}`
+        `http://13.201.133.175:8080/deliveryNote?${query.toString()}`
       );
 
       return data.data;

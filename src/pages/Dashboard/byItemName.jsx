@@ -14,7 +14,7 @@ import LabelledEditableSelect from "../../components/LabelledEditableSelect/inde
 import useInvoice from "../../hooks/services/useInvoice.js";
 import useDeliveryNote from "../../hooks/services/useDeliveryNote.js";
 
-const ByItemName = () => {
+const ByItemName = ({ chartWidth }) => {
   const classes = styles();
 
   const [dateRange, setDateRange] = useState([null, null]);
@@ -81,7 +81,7 @@ const ByItemName = () => {
 
   const chartSetting = {
     yAxis: [],
-    width: 1600,
+    width: `${chartWidth}`,
     height: 680,
   };
 
@@ -89,18 +89,21 @@ const ByItemName = () => {
     setDateRange(update);
   };
 
-  console.log("invoiceDataArray?.length > 0", invoiceDataArray?.length > 0);
-
   return (
     <Paper className={classes.itemChart}>
       <Grid item container justifyContent={"space-between"}>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <Typography variant="h5" sx={classes.templateTitle}>
             Filtered By Item Name
           </Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Grid item container justifyContent={"space-between"}>
+        <Grid item xs={6}>
+          <Grid
+            item
+            container
+            justifyContent={"space-between"}
+            columnSpacing={8}
+          >
             <Grid item xs={6}>
               <LabelledEditableSelect
                 id="itemName"
@@ -111,7 +114,7 @@ const ByItemName = () => {
                 items={filtersTypeArray}
               />
             </Grid>
-            <Grid item>
+            <Grid item xs={6}>
               <FormControl fullWidth>
                 <CustomSelectDateRange
                   startDate={startDate}

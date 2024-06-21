@@ -11,7 +11,7 @@ import { changeIntoMonths } from "./helper.js";
 import useInvoice from "../../hooks/services/useInvoice.js";
 import useDeliveryNote from "../../hooks/services/useDeliveryNote.js";
 
-const IncomeByMonth = () => {
+const IncomeByMonth = ({ chartWidth }) => {
   const classes = styles();
 
   const { data: invoiceData } = useInvoice({});
@@ -67,7 +67,7 @@ const IncomeByMonth = () => {
   });
   const chartSetting = {
     yAxis: [],
-    width: 1600,
+    width: `${chartWidth}`,
     height: 680,
   };
 

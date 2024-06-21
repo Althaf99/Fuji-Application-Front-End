@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import PageLayout from "../../components/PageLayout";
 
@@ -12,15 +12,30 @@ import ByItemName from "./byItemName.jsx";
 const Dashboard = () => {
   const classes = styles();
 
+  const [chartWidth, setChartWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setChartWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Grid container classes={{ container: classes.gridContainer }}>
       <PageLayout pageHeading={"Dashboard"}>
         <Grid item container justifyContent={"space-between"} spacing={1}>
           <Grid item xs={12}>
-            <ByItemName />
+            <ByItemName chartWidth={chartWidth} />
           </Grid>
           <Grid item xs={12}>
-            <IncomeByMonth />
+            <IncomeByMonth chartWidth={chartWidth} />
           </Grid>
         </Grid>
       </PageLayout>

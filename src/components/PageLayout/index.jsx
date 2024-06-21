@@ -12,13 +12,13 @@ const PageLayout = ({ pageHeading, helperText, children, pageActions }) => {
   return (
     <Grid container sx={classes.gridContainer}>
       <Grid item container justifyContent="space-between">
-        <Paper sx={classes.paper}>
-          <Grid item>
+        <Grid item>
+          <Paper sx={classes.paper}>
             <Typography sx={classes.headingTitle} align="center">
               {pageHeading}
             </Typography>
-          </Grid>
-        </Paper>
+          </Paper>
+        </Grid>
         <Grid container item alignItems={"center"} width={"max-content"}>
           <Grid item>{pageActions}</Grid>
         </Grid>

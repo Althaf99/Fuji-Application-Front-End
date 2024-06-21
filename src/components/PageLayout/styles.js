@@ -28,7 +28,7 @@ const styles = (theme) => {
     font-size: 5px;
     padding: 4px 15px 4px 15px;
     background-color: #bf3131;
-    width: 15%;
+    width: 100%;
   `;
 
   return {

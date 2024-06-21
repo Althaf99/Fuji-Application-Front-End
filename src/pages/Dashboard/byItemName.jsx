@@ -39,7 +39,7 @@ const ByItemName = () => {
     endDate: endDate ? formatDate(endDate) : endDate,
   });
 
-  const invoiceDataArray = [];
+  const invoiceDataArray = [{}];
   invoiceData?.forEach((item) => {
     const existingItem = invoiceDataArray?.find(
       (i) => i.itemName === item.itemName
@@ -62,7 +62,7 @@ const ByItemName = () => {
     endDate: endDate ? formatDate(endDate) : endDate,
   });
 
-  const salesDataArray = [];
+  const salesDataArray = [{}];
 
   deliveryNoteData?.forEach((item) => {
     const existingItem = salesDataArray?.find(
@@ -88,6 +88,8 @@ const ByItemName = () => {
   const onChange = (update) => {
     setDateRange(update);
   };
+
+  console.log("invoiceDataArray?.length > 0", invoiceDataArray?.length > 0);
 
   return (
     <Paper className={classes.itemChart}>
@@ -122,7 +124,7 @@ const ByItemName = () => {
         </Grid>
       </Grid>
 
-      {invoiceDataArray?.length > 0 || salesDataArray?.length > 0 ? (
+      {invoiceDataArray?.length > 0 && salesDataArray?.length > 0 ? (
         <BarChart
           dataset={filterType === "sales" ? salesDataArray : invoiceDataArray}
           xAxis={[{ scaleType: "band", dataKey: "itemName" }]}
@@ -138,7 +140,7 @@ const ByItemName = () => {
           margin={{ left: 100, right: 100 }}
         />
       ) : (
-        <></>
+        <>Hello World</>
       )}
     </Paper>
   );

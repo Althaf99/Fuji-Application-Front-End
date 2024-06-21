@@ -81,7 +81,7 @@ const IncomeByMonth = () => {
         </Grid>
       </Grid>
 
-      {finalArray.length > 0 && (
+      {finalArray?.length > 0 && (
         <LineChart
           dataset={finalArray}
           xAxis={[{ scaleType: "band", dataKey: "month" }]}

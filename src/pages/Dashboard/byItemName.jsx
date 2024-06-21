@@ -122,7 +122,7 @@ const ByItemName = () => {
         </Grid>
       </Grid>
 
-      {invoiceDataArray.length > 0 || salesDataArray.length > 0 ? (
+      {invoiceDataArray?.length > 0 || salesDataArray?.length > 0 ? (
         <BarChart
           dataset={filterType === "sales" ? salesDataArray : invoiceDataArray}
           xAxis={[{ scaleType: "band", dataKey: "itemName" }]}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Login } from "@mui/icons-material";
 import { Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useStyles from "./Login";
@@ -59,7 +58,7 @@ const LoginForm = () => {
             fullWidth
             disabled={!checkValidation()}
           >
-            <Login />
+            Login
           </Button>
         </Grid>
       </Grid>

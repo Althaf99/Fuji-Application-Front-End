@@ -19,6 +19,7 @@ import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import { Grid } from "@material-ui/core";
 
 import styles from "./styles.js";
+import { Logout } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -224,6 +225,22 @@ const SideNavBar = () => {
                         location.pathname === "/addItems" ? "21px" : "16px",
                       fontWeight:
                         location.pathname === "/addItems" ? "40px" : "16px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <List style={{ paddingBottom: "20px" }}>
+              <Link to="/" className={`${classes.link}`}>
+                <ListItem>
+                  <ListItemIcon>
+                    <Logout sx={cls.logout} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Logout"
+                    primaryTypographyProps={{
+                      fontSize: "16px",
+                      fontWeight: "16px",
                     }}
                   />
                 </ListItem>

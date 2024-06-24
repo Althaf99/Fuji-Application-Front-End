@@ -14,22 +14,26 @@ import { DeliveryNotePrinter } from "../../components/Printers/DeliveryNotePrint
 import AddItems from "../../pages/AddItems";
 import ListExcess from "../../pages/Excess";
 import Dashboard from "../../pages/Dashboard";
+import LoginForm from "../../pages/Login";
 import { ExcessSheetPrinter } from "../Printers/ExcessSheetPrinter";
 
 const AppRouter = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<SideNavBar />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="purchaseOrder" element={<ListPurchaseOrder />} />
-        <Route path="invoice" element={<ListInvoice />} />
-        <Route path="invoicePrinter" element={<InvoicePrinter />} />
-        <Route path="deliveryNote" element={<ListDeliveryNote />} />
-        <Route path="deliveryNotePrinter" element={<DeliveryNotePrinter />} />
-        <Route path="addItems" element={<AddItems />} />
-        <Route path="excess" element={<ListExcess />} />
-        <Route path="excessSheetPrinter" element={<ExcessSheetPrinter />} />
-      </Route>
+      <>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/" element={<SideNavBar />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="purchaseOrder" element={<ListPurchaseOrder />} />
+          <Route path="invoice" element={<ListInvoice />} />
+          <Route path="invoicePrinter" element={<InvoicePrinter />} />
+          <Route path="deliveryNote" element={<ListDeliveryNote />} />
+          <Route path="deliveryNotePrinter" element={<DeliveryNotePrinter />} />
+          <Route path="addItems" element={<AddItems />} />
+          <Route path="excess" element={<ListExcess />} />
+          <Route path="excessSheetPrinter" element={<ExcessSheetPrinter />} />
+        </Route>
+      </>
     )
   );
   return { router };

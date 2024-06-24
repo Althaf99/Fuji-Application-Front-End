@@ -61,6 +61,14 @@ const styles = ({ location }) => {
     padding: ${location.pathname === "/addItems" ? "7px" : "5px"};
   `;
 
+  const logout = css`
+    border-radius: 40px;
+    box-shadow: 0 0 1.3rem 0 #e5e1da;
+    color: black;
+    font-size: 40px;
+    padding: 5px;
+  `;
+
   const save = css`
     border-radius: 40px;
     box-shadow: ${location.pathname === "/deliveryNote"
@@ -95,6 +103,7 @@ const styles = ({ location }) => {
     save,
     activeLink,
     link,
+    logout,
   };
 };
 export default styles;

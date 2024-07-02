@@ -30,6 +30,12 @@ const ManageInvoice = ({
     new Date(reverseFormatDate(selectedInvoice?.invoiceDate))
   );
 
+  const [poDate, setPoDate] = useState(
+    new Date(reverseFormatDate(selectedInvoice?.poDate))
+  );
+
+  console.log("selectedInvoice", selectedInvoice);
+
   const { enqueueSnackbar } = useSnackbar();
 
   const setEnqueueSnackbar = (msg, snackerVariant) => {
@@ -46,17 +52,21 @@ const ManageInvoice = ({
   const formik = useFormik({
     initialValues: {
       invoiceDate: reverseFormatDate(selectedInvoice?.invoiceDate) || "",
+      poDate: reverseFormatDate(selectedInvoice?.poDate) || "",
       itemName: selectedInvoice?.itemName || "",
       itemColor: selectedInvoice?.itemColor || "",
       quantity: selectedInvoice?.quantity || "",
       amount: selectedInvoice?.amount || "",
       unitPrice: selectedInvoice?.unitPrice || "",
+      po: selectedInvoice?.po || "",
     },
 
     onSubmit: async () => {
       try {
         const Invoice = {
           invoiceDate: formatDate(date),
+          poDate: formatDate(poDate),
+          po: formik.values.po,
           itemName: formik.values.itemName,
           itemColor: formik.values.itemColor,
           quantity: formik.values.quantity,
@@ -85,6 +95,9 @@ const ManageInvoice = ({
     setDate(date);
   };
 
+  const handlePoDateSelect = (date) => {
+    setPoDate(poDate);
+  };
   return (
     <>
       <DialogBox
@@ -103,18 +116,53 @@ const ManageInvoice = ({
           >
             <Grid item xs={12}>
               <form onSubmit={formik.handleSubmit}>
-                <Grid xs={12} item className={classes.textField}>
-                  <Grid item>
-                    <Grid>
-                      <Grid className={classes.label}>SELECT DATE</Grid>
-                      <CustomDatePicker
-                        handleDateSelect={handleDateSelect}
-                        date={date}
-                      />
+                <Grid item container className={classes.section} spacing={3}>
+                  <Grid xs={12} item className={classes.textField}>
+                    <Grid item>
+                      <Grid>
+                        <Grid className={classes.label}>SELECT PO DATE</Grid>
+                        <CustomDatePicker
+                          handleDateSelect={handlePoDateSelect}
+                          date={poDate}
+                        />
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-
+                <Grid item container className={classes.section} spacing={3}>
+                  <Grid xs={12} item className={classes.textField}>
+                    <Grid item>
+                      <Grid>
+                        <Grid className={classes.label}>
+                          SELECT INVOICE DATE
+                        </Grid>
+                        <CustomDatePicker
+                          handleDateSelect={handleDateSelect}
+                          date={date}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item container className={classes.section} spacing={3}>
+                  <Grid item className={classes.textField}>
+                    <Grid item>
+                      <FormControl fullWidth>
+                        <LabelledEditableSelect
+                          id="po"
+                          name="po"
+                          label="PO Number"
+                          placeholder="Enter PO Number"
+                          onChange={(value) =>
+                            formik.setFieldValue("po", value)
+                          }
+                          value={formik.values.po}
+                          items={itemNamesArray}
+                        />
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </Grid>
                 <Grid item container className={classes.section} spacing={3}>
                   <Grid item className={classes.textField}>
                     <Grid item>

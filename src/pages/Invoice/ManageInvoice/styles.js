@@ -38,6 +38,6 @@ export const styles = makeStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: "0.875rem",
-    paddingBottom: "14px",
+    paddingBottom: "4px",
   },
 }));

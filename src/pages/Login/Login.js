@@ -38,12 +38,10 @@ const useStyles = makeStyles(() => ({
     },
   },
   image: {
-    maxWidth: "100%",
-    maxHeight: "100%",
+    maxWidth: "90%",
+    maxHeight: "90%",
     display: "flex",
-    top: "10%",
     zIndex: "99",
-    paddingBottom: "10px",
     position: "relative",
   },
 }));

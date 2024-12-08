@@ -32,13 +32,37 @@ const columns = [
     width: "35%",
   },
   {
-    Header: "Balance",
+    Header: "PO Balance",
     accessor: "quantity",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
     Cell: ({ value }) => <>{value.toLocaleString()}</>,
     width: "25%",
   },
+  // {
+  //   Header: "Stock Balance",
+  //   accessor: "quantity",
+  //   headerStyles: { textAlign: "center" },
+  //   cellStyles: { textAlign: "center" },
+  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
+  //   width: "25%",
+  // },
+  // {
+  //   Header: "Total Shots",
+  //   accessor: "quantity",
+  //   headerStyles: { textAlign: "center" },
+  //   cellStyles: { textAlign: "center" },
+  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
+  //   width: "25%",
+  // },
+  // {
+  //   Header: "Total Hours",
+  //   accessor: "quantity",
+  //   headerStyles: { textAlign: "center" },
+  //   cellStyles: { textAlign: "center" },
+  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
+  //   width: "25%",
+  // },
 ];
 
 export const PoBalancePrinter = forwardRef((props, ref) => {

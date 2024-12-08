@@ -12,13 +12,8 @@ const ItemColorOptionalPanel = ({ values }) => {
   const { mutateAsync: deleter } = useDeleteItemColor({ id: values.id });
   const classes = styles();
   return (
-    <Grid>
       <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          width: "fit-content",
-        }}
+       
       >
         <Button
           id="btn-delete-credential"
@@ -31,7 +26,6 @@ const ItemColorOptionalPanel = ({ values }) => {
           startIcon={<DeleteIcon className={classes.menuIconRoot} />}
         ></Button>
       </Box>
-    </Grid>
   );
 };
 

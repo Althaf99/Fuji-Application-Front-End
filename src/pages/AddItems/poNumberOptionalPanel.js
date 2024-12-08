@@ -12,13 +12,8 @@ const PoNumberOptionalPanel = ({ values }) => {
   const { mutateAsync: deleter } = useDeletePoNumber({ id: values.id });
   const classes = styles();
   return (
-    <Grid>
       <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          width: "fit-content",
-        }}
+       
       >
         <Button
           id="btn-delete-credential"
@@ -31,7 +26,6 @@ const PoNumberOptionalPanel = ({ values }) => {
           startIcon={<DeleteIcon className={classes.menuIconRoot} />}
         ></Button>
       </Box>
-    </Grid>
   );
 };
 

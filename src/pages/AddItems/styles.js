@@ -93,7 +93,7 @@ export const styles = makeStyles((theme) => ({
     width: "16px",
     height: "16px",
     color: "#808CA3",
-    marginRight: "15px",
+    // marginRight: "15px",
   },
   deleteBtn: {
     "&:hover": {

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useStyles from "./Login";
 import LabeledTextField from "../../components/LabeledTextField";
-
 import Fuji from "../../Fuji.png";
+
+import { UserContext } from "../../components/UserContext";
 
 const LoginForm = () => {
   const [userName, setUserName] = useState();
@@ -16,6 +17,10 @@ const LoginForm = () => {
   const handleSubmit = (values) => {
     navigate("/dashboard");
   };
+
+  const { itemNames } = useContext(UserContext);
+
+  console.log("itemNames", itemNames);
 
   const checkValidation = () => {
     if (userName === "admin" && password === "admin") {

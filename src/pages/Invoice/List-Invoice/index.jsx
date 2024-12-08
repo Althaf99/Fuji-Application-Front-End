@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import OptionPanel from "../option-panel";
@@ -24,10 +24,10 @@ import ManageInvoice from "../ManageInvoice/index.jsx";
 
 import { formatDate } from "./helper.js";
 
-import useItemNames from "../../../hooks/services/useItemNames";
-import useItemColors from "../../../hooks/services/useItemColors";
 import useInvoice from "../../../hooks/services/useInvoice";
 import useAddInvoiceNo from "../../../hooks/services/useAddInvoiceNo";
+
+import { UserContext } from "../../../components/UserContext/index.jsx";
 
 const ListInvoice = () => {
   const classes = styles();
@@ -51,8 +51,7 @@ const ListInvoice = () => {
 
   const [selectedInvoice, setSelectedInvoice] = useState();
 
-  const { data: itemColors } = useItemColors();
-  const { data: itemNames } = useItemNames();
+  const { itemNames, itemColors } = useContext(UserContext);
 
   const itemNamesArray =
     itemNames &&

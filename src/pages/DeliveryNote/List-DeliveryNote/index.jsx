@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 
@@ -20,9 +20,9 @@ import ManageDeliveryNote from "../ManageDeliveryNote";
 
 import { formatDate } from "./helper.js";
 
-import useItemNames from "../../../hooks/services/useItemNames";
-import useItemColors from "../../../hooks/services/useItemColors";
 import useDeliveryNote from "../../../hooks/services/useDeliveryNote";
+
+import { UserContext } from "../../../components/UserContext/index.jsx";
 
 const ListDeliveryNote = () => {
   const classes = styles();
@@ -44,8 +44,7 @@ const ListDeliveryNote = () => {
   const [openDeliveryNoteDialogBox, setOpenDeliveryNoteDialogBox] =
     useState(false);
 
-  const { data: itemColors } = useItemColors();
-  const { data: itemNames } = useItemNames();
+  const { itemNames, itemColors } = useContext(UserContext);
 
   const itemNamesArray =
     itemNames &&

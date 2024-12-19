@@ -209,6 +209,29 @@ const SideNavBar = () => {
             </List>
             <List style={{ paddingBottom: "20px" }}>
               <Link
+                to="/stock"
+                className={`${classes.link} ${
+                  location.pathname === "/stock" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    <CloudSyncOutlinedIcon sx={cls.stock} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Stock"
+                    primaryTypographyProps={{
+                      fontSize:
+                        location.pathname === "/stock" ? "21px" : "16px",
+                      fontWeight:
+                        location.pathname === "/stock" ? "40px" : "16px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <List style={{ paddingBottom: "20px" }}>
+              <Link
                 to="/addItems"
                 className={`${classes.link} ${
                   location.pathname === "/addItems" ? classes.activeLink : ""

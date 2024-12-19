@@ -33,7 +33,7 @@ const AddItems = () => {
   const itemNameColumns = [
     {
       Header: "ID",
-      accessor: "ids",
+      accessor: "id",
     },
     {
       Header: "No",

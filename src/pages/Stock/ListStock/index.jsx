@@ -2,27 +2,27 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 
-import OptionPanel from "./deliveryNoteOptionalPanel.js";
+import OptionPanel from "./stockOptionalPanel.js";
 import { styles } from "./styles";
 
 import { Button } from "@mui/material";
-import { Grid, FormControl } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import PageLayout from "../../../components/PageLayout";
 import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
 import LocalPrintshopTwoToneIcon from "@mui/icons-material/LocalPrintshopTwoTone";
-import { DeliveryNotePrinter } from "../../../components/Printers/DeliveryNotePrinter/index.jsx";
-import CustomSelectDateRange from "../../../components/CustomSelectDateRange/index.jsx";
+import { StockPrinter } from "../../../components/Printers/StockPrinter/index.jsx";
 
 import ManageStock from "../ManageStock/index.jsx";
 
 import { formatDate } from "./helper.js";
 
-import useDeliveryNote from "../../../hooks/services/useDeliveryNote";
+import useStock from "../../../hooks/services/useStock";
 
 import { UserContext } from "../../../components/UserContext/index.jsx";
+import useUpdateStockById from "../../../hooks/services/useUpdateStockById.js";
 
 const ListStock = () => {
   const classes = styles();
@@ -31,15 +31,8 @@ const ListStock = () => {
 
   const [itemName, setItemName] = useState();
   const [itemColor, setItemColor] = useState();
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
   const [selectedStock, setSelectedStock] = useState();
 
-  useEffect(() => {
-    setStartDate(dateRange[0]);
-    setEndDate(dateRange[1]);
-  }, [dateRange]);
 
   const [openStockDialogBox, setOpenStockDialogBox] =
     useState(false);
@@ -62,38 +55,23 @@ const ListStock = () => {
       value: itemColor,
     }));
 
-  const { data: deliverNoteData } = useDeliveryNote({
+  const { data: stockData } = useStock({
     itemName: itemName,
     itemColor: itemColor,
-    startDate: startDate ? formatDate(startDate) : null,
-    endDate: endDate ? formatDate(endDate) : null,
   });
+
 
   const columns = [
     {
       Header: "ID",
       accessor: "id",
-    },
+    },  
     {
       Header: "No",
       accessor: "no",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
       width: "5%",
-    },
-    {
-      Header: "Delivery Date",
-      accessor: "deliveryDate",
-      headerStyles: { textAlign: "center" },
-      cellStyles: { textAlign: "center" },
-      width: "20%",
-    },
-    {
-      Header: "Description",
-      accessor: "description",
-      headerStyles: { textAlign: "center" },
-      cellStyles: { textAlign: "center" },
-      width: "20%",
     },
     {
       Header: "ItemName",
@@ -109,7 +87,6 @@ const ListStock = () => {
       cellStyles: { textAlign: "center" },
       width: "20%",
     },
-
     {
       Header: "Item",
       accessor: "item",
@@ -125,7 +102,6 @@ const ListStock = () => {
       Cell: ({ value }) => <>{value.toLocaleString()}</>,
       width: "20%",
     },
-
     {
       Header: "Actions",
       accessor: "actions",
@@ -148,22 +124,19 @@ const ListStock = () => {
     },
   ];
 
-  const handleCreateDeliveryNote = () => {
+  const handleCreateStock = () => {
     setOpenStockDialogBox(true);
   };
 
-  const handlePrintDeliveryNote = () => {
-    navigate(`/deliveryNotePrinter`, {
-      state: { deliveryNoteDate: formatDate(startDate) },
+  const handlePrintStock = () => {
+    navigate(`/stock`, {
+      state: { date: formatDate(new Date()) },
     });
   };
 
-  const onChange = (update) => {
-    setDateRange(update);
-  };
 
   let no = 0;
-  deliverNoteData?.forEach((element) => {
+  stockData?.forEach((element) => {
     element.item = `${element.itemName} ${element.itemColor}`;
     no = no + 1;
     element.no = no;
@@ -179,10 +152,10 @@ const ListStock = () => {
               <Button
                 id="btn-create-Delivery-Note"
                 variant="contained"
-                onClick={handleCreateDeliveryNote}
+                onClick={handleCreateStock}
               >
                 <AddCircleOutlineIcon className={classes.plusIcon} />
-                {"Create Stock"}
+                {"Add Stock"}
               </Button>
             </Grid>
             <Grid item>
@@ -191,20 +164,18 @@ const ListStock = () => {
                   <Button
                     id="btn-create-invoice"
                     variant="contained"
-                    onClick={handlePrintDeliveryNote}
+                    onClick={handlePrintStock}
                   >
                     <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
                     {"Print Stock"}
                   </Button>
                 )}
                 content={() => componentRef.current}
-                documentTitle={`Stock ${formatDate(startDate)}`}
+                documentTitle={`Stock ${formatDate(new Date())}`}
               />
               <div style={{ display: "none" }}>
-                <DeliveryNotePrinter
+                <StockPrinter
                   ref={componentRef}
-                  startDate={startDate}
-                  endDate={endDate}
                   itemName={itemName}
                   itemColor={itemColor}
                 />
@@ -239,16 +210,15 @@ const ListStock = () => {
         </Grid>
 
         <Grid item className={classes.section} xs={12}>
-          {deliverNoteData && (
+          {stockData && (
             <LazyLoadingTable
               columns={columns}
               hasNextPage={false}
-              data={deliverNoteData}
-              hiddenColumns={["id", "description", "itemName", "itemColor"]}
+              data={stockData}
+              hiddenColumns={["id", "itemName", "itemColor"]}
               maxHeightInRows={15}
               customProps={{ height: "565px" }}
               onClickTableRow={(index, row) => {
-                console.log(index, row);
               }}
             />
           )}

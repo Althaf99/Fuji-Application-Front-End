@@ -16,6 +16,7 @@ import LabeledTextField from "../../../components/LabeledTextField";
 import ManageStockOptionalPanel from "./ManageStockOptionalPanel.js";
 
 import useUpdateStock from "../../../hooks/services/useUpdateStock.js";
+import useUpdateStockById from "../../../hooks/services/useUpdateStockById.js";
 
 const ManageStock = ({
   setOpenStockDialogBox,
@@ -26,7 +27,6 @@ const ManageStock = ({
   setSelectedStock,
 }) => {
   const classes = styles();
-  const [openItem, setOpenItem] = useState(false);
   const [stock, setStock] = useState([]);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -39,6 +39,9 @@ const ManageStock = ({
   };
 
   const { mutateAsync: updateStock } = useUpdateStock();
+  const { mutateAsync: updateStockById } = useUpdateStockById({
+    id: selectedStock?.id,
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -64,7 +67,18 @@ const ManageStock = ({
           });
         });
         const outputArray = Array.from(groupedItems.values());
-        await updateStock(outputArray);
+        if(selectedStock){
+          const stock = {
+            itemName: formik.values.itemName,
+            itemColor: formik.values.itemColor,
+            quantity: formik.values.quantity,
+          };
+          await updateStockById(stock);
+          setOpenStockDialogBox(false);
+          setSelectedStock(null)
+        }else{
+          await updateStock(outputArray);
+        }
         formik.resetForm();
         setStock([]);
         setEnqueueSnackbar("Stock Added Succesfully", "success");
@@ -213,7 +227,8 @@ const ManageStock = ({
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item container className={classes.section} spacing={3}>
+                {!selectedStock && stock && (
+                  <Grid item container className={classes.section} spacing={3}>
                   <Button
                     id="btn-general-info-next"
                     className={classes.itemSaveBtn}
@@ -224,6 +239,7 @@ const ManageStock = ({
                     Add Item To Stock
                   </Button>
                 </Grid>
+                )}
                 {!selectedStock && stock && (
                   <>
                     <Grid item className={classes.listTable} xs={12}>

@@ -7,14 +7,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 
-import useDeletDeliveryNote from "../../../hooks/services/useDeleteDeliveryNote";
+import useDeletStock from "../../../hooks/services/useDeleteStock";
 
 const DeliverNoteOptionalPanel = ({
   values,
-  setOpenDeliveryNoteDialogBox,
-  setSelectedDelivery,
+  setOpenStockDialogBox,
+  setSelectedStock,
 }) => {
-  const deleteMutation = useDeletDeliveryNote({
+  const deleteMutation = useDeletStock({
     id: values?.id,
   });
 
@@ -23,8 +23,8 @@ const DeliverNoteOptionalPanel = ({
   };
 
   const handleEdit = (values) => {
-    setSelectedDelivery(values);
-    setOpenDeliveryNoteDialogBox(true);
+    setSelectedStock(values);
+    setOpenStockDialogBox(true);
   };
 
   return (

@@ -36,6 +36,7 @@ const AppRouter = () => {
           <Route path="addItems" element={<AddItems />} />
           <Route path="excess" element={<ListExcess />} />
           <Route path="stock" element={<ListStock />} />
+          <Route path="stockPrinter" element={<ListStock />} />
           <Route path="excessSheetPrinter" element={<ExcessSheetPrinter />} />
         </Route>
       </>

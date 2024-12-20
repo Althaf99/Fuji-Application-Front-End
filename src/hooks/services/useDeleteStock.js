@@ -1,16 +1,18 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-const useUpdateStock = () => {
+const useDeleteStock = ({ id }) => {
   const QueryClient = useQueryClient();
-  const url = "http://localhost:8080/stock";
+  const deleteRequestItem = `http://localhost:8080/stock/${id}`;
 
   return useMutation(
-    async (obj) => await axios.post(url, obj),
-    {
-      onSuccess: async () => {
+    (obj) =>
+      axios.delete(deleteRequestItem, JSON.stringify(obj)).then((x) => {
         QueryClient.invalidateQueries("stockData");
-      },
+        x.json();
+      }),
+    {
+      onSuccess: async () => {},
     },
     {
       onError: async () => {
@@ -20,4 +22,4 @@ const useUpdateStock = () => {
   );
 };
 
-export default useUpdateStock;
+export default useDeleteStock;

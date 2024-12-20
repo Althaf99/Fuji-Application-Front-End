@@ -6,7 +6,7 @@ import PrintableTable from "../../../components/PrintableTable";
 
 import { styles } from "./styles";
 
-import useRequest from "../../../hooks/services/useRequest";
+import useReport from "../../../hooks/services/useReport";
 
 import { formatDate } from "../../../pages/PurchaseOrder/ManageRequest/helper";
 
@@ -39,43 +39,21 @@ const columns = [
     Cell: ({ value }) => <>{value.toLocaleString()}</>,
     width: "25%",
   },
-  // {
-  //   Header: "Stock Balance",
-  //   accessor: "quantity",
-  //   headerStyles: { textAlign: "center" },
-  //   cellStyles: { textAlign: "center" },
-  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
-  //   width: "25%",
-  // },
-  // {
-  //   Header: "Total Shots",
-  //   accessor: "quantity",
-  //   headerStyles: { textAlign: "center" },
-  //   cellStyles: { textAlign: "center" },
-  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
-  //   width: "25%",
-  // },
-  // {
-  //   Header: "Total Hours",
-  //   accessor: "quantity",
-  //   headerStyles: { textAlign: "center" },
-  //   cellStyles: { textAlign: "center" },
-  //   Cell: ({ value }) => <>{value.toLocaleString()}</>,
-  //   width: "25%",
-  // },
 ];
 
 export const PoBalancePrinter = forwardRef((props, ref) => {
   const classes = styles();
 
-  const { data: requestData } = useRequest({
+  const { data: report } = useReport({
     itemName: "",
     itemColor: "",
     requestNumber: "",
     date: "",
   });
 
-  const filteredRequestArray = requestData?.filter(
+  console.log("report",report)
+
+  const filteredRequestArray = report?.filter(
     (element) => element.quantity > 0
   );
 

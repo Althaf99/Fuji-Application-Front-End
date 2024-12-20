@@ -16,7 +16,7 @@ import LocalPrintshopTwoToneIcon from "@mui/icons-material/LocalPrintshopTwoTone
 import { DeliveryNotePrinter } from "../../../components/Printers/DeliveryNotePrinter/index.jsx";
 import CustomSelectDateRange from "../../../components/CustomSelectDateRange/index.jsx";
 
-import ManageDeliveryNote from "../ManageStock/index.jsx";
+import ManageStock from "../ManageStock/index.jsx";
 
 import { formatDate } from "./helper.js";
 
@@ -34,14 +34,14 @@ const ListStock = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [selectedDelivery, setSelectedDelivery] = useState();
+  const [selectedStock, setSelectedStock] = useState();
 
   useEffect(() => {
     setStartDate(dateRange[0]);
     setEndDate(dateRange[1]);
   }, [dateRange]);
 
-  const [openDeliveryNoteDialogBox, setOpenDeliveryNoteDialogBox] =
+  const [openStockDialogBox, setOpenStockDialogBox] =
     useState(false);
 
   const { itemNames, itemColors } = useContext(UserContext);
@@ -140,8 +140,8 @@ const ListStock = () => {
         return (
           <OptionPanel
             values={values}
-            setOpenDeliveryNoteDialogBox={setOpenDeliveryNoteDialogBox}
-            setSelectedDelivery={setSelectedDelivery}
+            setOpenStockDialogBox={setOpenStockDialogBox}
+            setSelectedStock={setSelectedStock}
           />
         );
       },
@@ -149,7 +149,7 @@ const ListStock = () => {
   ];
 
   const handleCreateDeliveryNote = () => {
-    setOpenDeliveryNoteDialogBox(true);
+    setOpenStockDialogBox(true);
   };
 
   const handlePrintDeliveryNote = () => {
@@ -254,14 +254,14 @@ const ListStock = () => {
           )}
         </Grid>
       </PageLayout>
-      {openDeliveryNoteDialogBox === true && (
-        <ManageDeliveryNote
+      {openStockDialogBox === true && (
+        <ManageStock
           itemColorsArray={itemColorsArray}
           itemNamesArray={itemNamesArray}
-          openDeliveryNoteDialogBox={openDeliveryNoteDialogBox}
-          setOpenDeliveryNoteDialogBox={setOpenDeliveryNoteDialogBox}
-          selectedDelivery={selectedDelivery}
-          setSelectedDelivery={setSelectedDelivery}
+          openStockDialogBox={openStockDialogBox}
+          setOpenStockDialogBox={setOpenStockDialogBox}
+          selectedStock={selectedStock}
+          setSelectedStock={setSelectedStock}
         />
       )}
     </Grid>

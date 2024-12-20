@@ -8,17 +8,17 @@ import { styles } from "./styles";
 
 const ManageDeliveryNoteOptionalPanel = ({
   values,
-  deliveryNote,
-  setDeliveryNote,
+  stock,
+  setStock,
 }) => {
   const handleDeleteElement = (values) => {
-    const arrayList = deliveryNote.filter(
+    const arrayList = stock.filter(
       (item) =>
         item.itemColor !== values.itemColor ||
-        item.quantity !== values.quantity ||
-        item.description !== values.description
+        item.quantity !== values.quantity || 
+        item.itemName !== values.itemName
     );
-    setDeliveryNote(arrayList);
+    setStock(arrayList);
   };
 
   const classes = styles();

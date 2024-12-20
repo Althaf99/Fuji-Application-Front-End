@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 
 import Grid from "@material-ui/core/Grid";
 import { Button, FormControl } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useSnackbar } from "notistack";
 
 import { styles } from "./styles";
@@ -14,21 +13,21 @@ import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import LabelledEditableSelect from "../../../components/LabelledEditableSelect/index.js";
 import LabeledTextField from "../../../components/LabeledTextField";
 
-import ManageDeliveryNoteOptionalPanel from "./ManageDeliveryNoteOptionalPanel.js";
+import ManageStockOptionalPanel from "./ManageStockOptionalPanel.js";
 
 import useUpdateStock from "../../../hooks/services/useUpdateStock.js";
 
-const ManageDeliveryNote = ({
-  setOpenDeliveryNoteDialogBox,
-  openDeliveryNoteDialogBox,
+const ManageStock = ({
+  setOpenStockDialogBox,
+  openStockDialogBox,
   itemColorsArray,
   itemNamesArray,
-  selectedDelivery,
-  setSelectedDelivery,
+  selectedStock,
+  setSelectedStock,
 }) => {
   const classes = styles();
   const [openItem, setOpenItem] = useState(false);
-  const [deliveryNote, setDeliveryNote] = useState([]);
+  const [stock, setStock] = useState([]);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -43,15 +42,15 @@ const ManageDeliveryNote = ({
 
   const formik = useFormik({
     initialValues: {
-      itemName: selectedDelivery?.itemName || "",
-      itemColor: selectedDelivery?.itemColor || "",
-      quantity: selectedDelivery?.quantity || "",
+      itemName: selectedStock?.itemName || "",
+      itemColor: selectedStock?.itemColor || "",
+      quantity: selectedStock?.quantity || "",
     },
 
     onSubmit: async () => {
       try {
         const groupedItems = new Map();
-        deliveryNote.forEach((item) => {
+        stock.forEach((item) => {
           const key = `${item.itemName}-${item.itemColor}`;
           if (!groupedItems.has(key)) {
             groupedItems.set(key, {
@@ -67,11 +66,11 @@ const ManageDeliveryNote = ({
         const outputArray = Array.from(groupedItems.values());
         await updateStock(outputArray);
         formik.resetForm();
-        setDeliveryNote([]);
-        setEnqueueSnackbar("Delivery Note Added Succesfully", "success");
+        setStock([]);
+        setEnqueueSnackbar("Stock Added Succesfully", "success");
       } catch (e) {
         setEnqueueSnackbar(
-          "Error Occured during Delivery Note Submission",
+          "Error Occured during Stock Submission",
           "error"
         );
       }
@@ -85,18 +84,14 @@ const ManageDeliveryNote = ({
       quantity: values.quantity,
       itemName: values.itemName,
     };
-    setDeliveryNote([...deliveryNote, itemObj]);
+    setStock([...stock, itemObj]);
     formik.setFieldValue("itemColor", "");
     formik.setFieldValue("quantity", "");
   };
 
-  const handleOpenItemColorDialogBox = () => {
-    setOpenItem(true);
-  };
-
   const closeDialog = () => {
-    setSelectedDelivery();
-    setOpenDeliveryNoteDialogBox(false);
+    setSelectedStock();
+    setOpenStockDialogBox(false);
   };
 
   const columns = [
@@ -134,10 +129,10 @@ const ManageDeliveryNote = ({
         },
       }) => {
         return (
-          <ManageDeliveryNoteOptionalPanel
+          <ManageStockOptionalPanel
             values={values}
-            setDeliveryNote={setDeliveryNote}
-            deliveryNote={deliveryNote}
+            setStock={setStock}
+            stock={stock}
           />
         );
       },
@@ -147,11 +142,11 @@ const ManageDeliveryNote = ({
   return (
     <>
       <DialogBox
-        title={selectedDelivery ? "Update Stock" : "Create Stock"}
-        open={openDeliveryNoteDialogBox}
+        title={selectedStock ? "Update Stock" : "Add Stock"}
+        open={openStockDialogBox}
         setOpen={closeDialog}
-        maxWidth={selectedDelivery ? "sm" : "lg"}
-        height={selectedDelivery ? "600px" : "1200px"}
+        maxWidth={selectedStock ? "sm" : "lg"}
+        height={selectedStock ? "600px" : "1200px"}
         children={
           <Grid
             container
@@ -229,16 +224,15 @@ const ManageDeliveryNote = ({
                     Add Item To Stock
                   </Button>
                 </Grid>
-                {!selectedDelivery && deliveryNote && (
+                {!selectedStock && stock && (
                   <>
                     <Grid item className={classes.listTable} xs={12}>
                       <LazyLoadingTable
                         columns={columns}
-                        data={deliveryNote}
+                        data={stock}
                         hiddenColumns={["id"]}
                         maxHeightInRows={15}
                         onClickTableRow={(index, row) => {
-                          console.log(index, row);
                         }}
                         customProps={{ height: 390 }}
                       />
@@ -253,7 +247,7 @@ const ManageDeliveryNote = ({
                     variant="contained"
                     disbaled={formik.isSubmitting}
                   >
-                    {selectedDelivery ? "Update" : "Create"}
+                    {selectedStock ? "Update" : "Add Stock"}
                   </Button>
                 </Grid>
               </form>
@@ -264,4 +258,4 @@ const ManageDeliveryNote = ({
     </>
   );
 };
-export default ManageDeliveryNote;
+export default ManageStock;

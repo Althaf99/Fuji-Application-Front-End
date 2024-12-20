@@ -16,6 +16,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import UnfoldMoreDoubleOutlinedIcon from "@mui/icons-material/UnfoldMoreDoubleOutlined";
 import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import { Grid } from "@material-ui/core";
 
 import styles from "./styles.js";
@@ -216,7 +217,7 @@ const SideNavBar = () => {
               >
                 <ListItem>
                   <ListItemIcon>
-                    <CloudSyncOutlinedIcon sx={cls.stock} />
+                    <InventoryOutlinedIcon sx={cls.stock} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Stock"

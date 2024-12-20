@@ -14,15 +14,9 @@ export const styles = makeStyles((theme) => ({
       padding: "0em",
     },
   },
-  heading: {
-    paddingTop: "29px",
-  },
+
   section: {
     paddingTop: "20px",
-    flex: 1,
-  },
-  buttonSection: {
-    paddingTop: "40px",
     flex: 1,
   },
   cssOutlinedInput: {
@@ -30,9 +24,6 @@ export const styles = makeStyles((theme) => ({
   },
   textField: {
     flex: 1,
-  },
-  errorTextField: {
-    borderColor: "red !important",
   },
   block: {
     display: "flex",
@@ -44,47 +35,14 @@ export const styles = makeStyles((theme) => ({
     height: "40px",
     marginBottom: "50px",
   },
-  itemNameButton: {
-    width: "100%",
-    height: "50px",
-  },
   menuIconRoot: {
     width: "16px",
     height: "16px",
     color: "#808CA3",
     marginRight: "15px",
   },
-  backButton: {
-    width: "166px",
-    height: "40px",
-    marginBottom: "50px",
-    marginRight: "20px",
-  },
-  invalid: {
-    color: "red",
-    fontSize: "0.75rem",
-  },
-  tags: {
-    paddingTop: "10px",
-  },
-  required: {
-    color: "red",
-  },
-  displayButton: {
-    width: "100%",
-    height: "50px",
-    backgroundColor: "#ff9200",
-  },
-  listTable: {
+    listTable: {
     paddingTop: "40px",
-  },
-  label: {
-    color: "rgba(0, 24, 71, 1)",
-    fontFamily: "Nunito",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "0.875rem",
-    paddingBottom: "14px",
   },
   itemSaveBtn: {
     width: "100%",

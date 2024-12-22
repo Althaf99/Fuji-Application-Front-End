@@ -29,7 +29,6 @@ const columns = [
     accessor: "item",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
-    width: "35%",
   },
   {
     Header: "PO Balance",
@@ -37,7 +36,6 @@ const columns = [
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
     Cell: ({ value }) => <>{value.toLocaleString()}</>,
-    width: "25%",
   },
   {
     Header: "Stock Balance",
@@ -45,21 +43,18 @@ const columns = [
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
     Cell: ({ value }) => <>{value.toLocaleString()}</>,
-    width: "25%",
   },
   {
     Header: "Total Shots",
     accessor: "totalShots",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
-    width: "25%",
   },
   {
     Header: "Total Hours",
     accessor: "totalHours",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
-    width: "25%",
   },
 ];
 
@@ -77,7 +72,7 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
     element.item = `${element.itemName} ${element.itemColor}`;
   });
 
-  const updatedDataArray = report.map((obj) => {
+  const updatedDataArray = report?.map((obj) => {
     const totalShots =
       obj.poBalanceQuantity > obj.stockBalanceQuantity
         ? (

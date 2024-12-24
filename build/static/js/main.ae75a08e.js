@@ -63532,7 +63532,7 @@
                               (e.prev = 6),
                               (e.next = 9),
                               ab.get(
-                                "http://localhost:8080/purchaseOrder?".concat(
+                                "http://13.201.133.175:8080/purchaseOrder?".concat(
                                   a.toString()
                                 )
                               )
@@ -73745,7 +73745,7 @@
                         case 0:
                           return (
                             (e.next = 2),
-                            ab.post("http://localhost:8080/purchaseOrder", t)
+                            ab.post("http://13.201.133.175:8080/purchaseOrder", t)
                           );
                         case 2:
                           return e.abrupt("return", e.sent);
@@ -73807,7 +73807,7 @@
         UT = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/purchaseOrder/".concat(t);
+            r = "http://13.201.133.175:8080/purchaseOrder/".concat(t);
           return (0, Sg.useMutation)(
             (function () {
               var e = y(
@@ -74404,7 +74404,7 @@
                           return (
                             (e.prev = 0),
                             (e.next = 3),
-                            ab.get("http://localhost:8080/itemNames")
+                            ab.get("http://13.201.133.175:8080/itemNames")
                           );
                         case 3:
                           return (
@@ -74452,7 +74452,7 @@
                           return (
                             (e.prev = 0),
                             (e.next = 3),
-                            ab.get("http://localhost:8080/requestNumbers")
+                            ab.get("http://13.201.133.175:8080/requestNumbers")
                           );
                         case 3:
                           return (
@@ -74500,7 +74500,7 @@
                           return (
                             (e.prev = 0),
                             (e.next = 3),
-                            ab.get("http://localhost:8080/itemColors")
+                            ab.get("http://13.201.133.175:8080/itemColors")
                           );
                         case 3:
                           return (
@@ -74697,7 +74697,7 @@
         lZ = function (e) {
           var t = e.requestId,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/purchaseOrder/".concat(t);
+            r = "http://13.201.133.175:8080/purchaseOrder/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -77896,7 +77896,7 @@
         YM = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/invoice/".concat(t);
+            r = "http://13.201.133.175:8080/invoice/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -78816,7 +78816,7 @@
                             return (
                               (e.prev = 0),
                               (e.next = 3),
-                              ab.get("http://localhost:8080/invoice/".concat(t))
+                              ab.get("http://13.201.133.175:8080/invoice/".concat(t))
                             );
                           case 3:
                             return (n = e.sent), e.abrupt("return", n.data);
@@ -79004,7 +79004,7 @@
       var YD = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/invoice/".concat(t);
+            r = "http://13.201.133.175:8080/invoice/".concat(t);
           return (0, Sg.useMutation)(
             (function () {
               var e = y(
@@ -79399,7 +79399,7 @@
                               (e.prev = 8),
                               (e.next = 11),
                               ab.get(
-                                "http://localhost:8080/invoiceList?".concat(
+                                "http://13.201.133.175:8080/invoiceList?".concat(
                                   u.toString()
                                 )
                               )
@@ -79436,7 +79436,7 @@
             n = e.invoiceDate,
             r = e.invoiceNo,
             o = (0, Sg.useQueryClient)(),
-            i = "http://localhost:8080/AddInvoice/"
+            i = "http://13.201.133.175:8080/AddInvoice/"
               .concat(t, "/")
               .concat(n, "/")
               .concat(r);
@@ -80043,7 +80043,7 @@
         JD = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/deliveryNote/".concat(t);
+            r = "http://13.201.133.175:8080/deliveryNote/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -80325,7 +80325,7 @@
                               (e.prev = 5),
                               (e.next = 8),
                               ab.get(
-                                "http://localhost:8080/deliveryNote?".concat(
+                                "http://13.201.133.175:8080/deliveryNote?".concat(
                                   i.toString()
                                 )
                               )
@@ -80650,7 +80650,7 @@
                         case 0:
                           return (
                             (e.next = 2),
-                            ab.post("http://localhost:8080/deliveryNote", t)
+                            ab.post("http://13.201.133.175:8080/deliveryNote", t)
                           );
                         case 2:
                           return e.abrupt("return", e.sent);
@@ -80712,7 +80712,7 @@
         hj = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/deliveryNote/".concat(t);
+            r = "http://13.201.133.175:8080/deliveryNote/".concat(t);
           return (0, Sg.useMutation)(
             (function () {
               var e = y(
@@ -81664,7 +81664,7 @@
         Nj = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/itemNames/".concat(t);
+            r = "http://13.201.133.175:8080/itemNames/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -81818,7 +81818,7 @@
         Fj = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/itemColors/".concat(t);
+            r = "http://13.201.133.175:8080/itemColors/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -81895,7 +81895,7 @@
         Bj = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/requestNumbers/".concat(t);
+            r = "http://13.201.133.175:8080/requestNumbers/".concat(t);
           return (0, Sg.useMutation)(
             (function () {
               var e = y(
@@ -82002,7 +82002,7 @@
                         case 0:
                           return (
                             (e.next = 2),
-                            ab.post("http://localhost:8080/itemNames", t)
+                            ab.post("http://13.201.133.175:8080/itemNames", t)
                           );
                         case 2:
                           return e.abrupt("return", e.sent);
@@ -82123,7 +82123,7 @@
                         case 0:
                           return (
                             (e.next = 2),
-                            ab.post("http://localhost:8080/itemColors", t)
+                            ab.post("http://13.201.133.175:8080/itemColors", t)
                           );
                         case 2:
                           return e.abrupt("return", e.sent);
@@ -82244,7 +82244,7 @@
                         case 0:
                           return (
                             (e.next = 2),
-                            ab.post("http://localhost:8080/requestNumbers", t)
+                            ab.post("http://13.201.133.175:8080/requestNumbers", t)
                           );
                         case 2:
                           return e.abrupt("return", e.sent);
@@ -82366,7 +82366,7 @@
                           return (
                             (e.prev = 0),
                             (e.next = 3),
-                            ab.get("http://localhost:8080/requestNumbers")
+                            ab.get("http://13.201.133.175:8080/requestNumbers")
                           );
                         case 3:
                           return (
@@ -82783,7 +82783,7 @@
                               (e.prev = 5),
                               (e.next = 8),
                               ab.get(
-                                "http://localhost:8080/excess?".concat(
+                                "http://13.201.133.175:8080/excess?".concat(
                                   i.toString()
                                 )
                               )
@@ -82882,7 +82882,7 @@
         tA = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/excess/".concat(t);
+            r = "http://13.201.133.175:8080/excess/".concat(t);
           return (0, Sg.useMutation)(
             function (e) {
               return ab.delete(r, JSON.stringify(e)).then(function (e) {
@@ -83007,7 +83007,7 @@
         rA = function (e) {
           var t = e.id,
             n = (0, Sg.useQueryClient)(),
-            r = "http://localhost:8080/excess/".concat(t);
+            r = "http://13.201.133.175:8080/excess/".concat(t);
           return (0, Sg.useMutation)(
             (function () {
               var e = y(

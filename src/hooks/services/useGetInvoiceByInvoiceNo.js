@@ -5,7 +5,7 @@ const useInvoiceByInvoiceNo = ({ invoiceNo }) => {
   const fetchRequest = async () => {
     try {
       const data = await axios.get(
-        `http://localhost:8080/invoice/${invoiceNo}`
+        `http://13.201.133.175:8080/invoice/${invoiceNo}`
       );
 
       return data.data;

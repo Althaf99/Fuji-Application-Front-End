@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useCreatePoNumber = () => {
   const QueryClient = useQueryClient();
-  const projectUrl = "http://localhost:8080/requestNumbers";
+  const projectUrl = "http://13.201.133.175:8080/requestNumbers";
 
   return useMutation(
     async (obj) => await axios.post(projectUrl, obj),

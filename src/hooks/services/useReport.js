@@ -4,7 +4,7 @@ import axios from "axios";
 const useReport = () => {
   const fetchItemColor = async () => {
     try {
-      const data = await axios.get("http://localhost:8080/merged");
+      const data = await axios.get("http://13.201.133.175:8080/merged");
       return data?.data;
     } catch (e) {
       return Promise.reject(e);

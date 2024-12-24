@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useUpdateDeliveryNote = ({ id }) => {
   const QueryClient = useQueryClient();
-  const url = `http://localhost:8080/deliveryNote/${id}`;
+  const url = `http://13.201.133.175:8080/deliveryNote/${id}`;
 
   return useMutation(
     async (obj) => await axios.put(url, obj),

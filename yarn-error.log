@@ -31,7 +31,7 @@ npm manifest:
     "name": "fujicraft",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:8080",
+    "proxy": "http://13.201.133.175:8080",
     "dependencies": {
       "@emotion/react": "^11.10.4",
       "@emotion/styled": "^11.10.4",

@@ -16,7 +16,7 @@ const useStock = ({
    
     try {
       const data = await axios.get(
-        `http://localhost:8080/stock?${query.toString()}`
+        `http://13.201.133.175:8080/stock?${query.toString()}`
       );
 
       return data.data;

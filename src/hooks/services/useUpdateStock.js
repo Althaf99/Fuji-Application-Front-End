@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useUpdateStock = () => {
   const QueryClient = useQueryClient();
-  const url = "http://localhost:8080/stock";
+  const url = "http://13.201.133.175:8080/stock";
 
   return useMutation(
     async (obj) => await axios.post(url, obj),

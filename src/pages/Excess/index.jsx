@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { styles } from "./styles";
 
@@ -17,12 +17,12 @@ import OptionPanel from "./option-panel/index.js";
 
 import { formatDate } from "../PurchaseOrder/ListPurchaseOrder/helper.js";
 
-import useItemNames from "../../hooks/services/useItemNames";
-import useItemColors from "../../hooks/services/useItemColors";
 import useExcess from "../../hooks/services/useExcess";
 import ReactToPrint from "react-to-print";
 import { useNavigate } from "react-router-dom";
 import ManageExcess from "./ManageExcess/index.jsx";
+
+import { UserContext } from "../../components/UserContext/index.jsx";
 
 const ListExcess = () => {
   const classes = styles();
@@ -36,8 +36,7 @@ const ListExcess = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  const { data: itemColors } = useItemColors();
-  const { data: itemNames } = useItemNames();
+  const { itemNames, itemColors } = useContext(UserContext);
 
   const [openManageExcessDialogBox, setOpenManageExcessDialogBox] = useState();
 

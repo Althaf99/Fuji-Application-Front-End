@@ -9,7 +9,7 @@ const useUpdateExcess = ({ id }) => {
     async (obj) => await axios.put(url, obj),
     {
       onSuccess: async () => {
-        QueryClient.invalidateQueries();
+        QueryClient.invalidateQueries("excessData");
       },
     },
     {

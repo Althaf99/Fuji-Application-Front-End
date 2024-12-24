@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 
 import { Grid } from "@material-ui/core";
@@ -16,9 +16,9 @@ import PoNumber from "./PoNumber.jsx";
 
 import { styles } from "./styles.js";
 
-import useItemNames from "../../hooks/services/useItemNames.js";
-import useItemColors from "../../hooks/services/useItemColors.js";
 import usePoNumbers from "../../hooks/services/usePoNumbers.js";
+
+import { UserContext } from "../../components/UserContext/index.jsx";
 
 const AddItems = () => {
   const classes = styles();
@@ -26,8 +26,7 @@ const AddItems = () => {
   const [openItemColor, setOpenItemColor] = useState(false);
   const [openPoNumber, setOpenPoNumber] = useState(false);
 
-  const { data: itemNames } = useItemNames();
-  const { data: itemColors } = useItemColors();
+  const { itemNames, itemColors } = useContext(UserContext);
   const { data: poNumberList } = usePoNumbers();
 
   const itemNameColumns = [
@@ -49,10 +48,29 @@ const AddItems = () => {
       cellStyles: { textAlign: "center" },
     },
     {
+      Header: "Cavity",
+      accessor: "cavity",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "Weight Per Piece",
+      accessor: "weightPerPiece",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "Cycle Time",
+      accessor: "cycleTime",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
       Header: "Actions",
       accessor: "actions",
       headerStyles: { textAlign: "center" },
-      width: "13%",
+      cellStyles: { textAlign: "center" },
+      // width: "2%",
       Cell: ({
         cell: {
           row: { values },
@@ -91,7 +109,7 @@ const AddItems = () => {
       Header: "Actions",
       accessor: "actions",
       headerStyles: { textAlign: "center" },
-      width: "13%",
+      cellStyles: { textAlign: "center" },
       Cell: ({
         cell: {
           row: { values },
@@ -130,7 +148,7 @@ const AddItems = () => {
       Header: "Actions",
       accessor: "actions",
       headerStyles: { textAlign: "center" },
-      width: "13%",
+      cellStyles: { textAlign: "center" },
       Cell: ({
         cell: {
           row: { values },
@@ -204,7 +222,7 @@ const AddItems = () => {
               columns={itemNameColumns}
               hasNextPage={false}
               data={itemNames}
-              hiddenColumns={["id"]}
+              hiddenColumns={["id", "cavity", "cycleTime", "weightPerPiece"]}
               maxHeightInRows={15}
               customProps={{ height: "440px" }}
               onClickTableRow={(index, row) => {
@@ -243,6 +261,24 @@ const AddItems = () => {
             />
           )}
         </Grid>
+        <Grid item container>
+          <Grid item className={classes.section} xs={12}>
+            {itemNames && (
+              <LazyLoadingTable
+                columns={itemNameColumns}
+                hasNextPage={false}
+                data={itemNames}
+                hiddenColumns={["id"]}
+                maxHeightInRows={15}
+                customProps={{ height: "440px" }}
+                onClickTableRow={(index, row) => {
+                  console.log(index, row);
+                }}
+              />
+            )}
+          </Grid>
+        </Grid>
+
         <ItemName
           setOpenItemName={setOpenItemName}
           openItemName={openItemName}

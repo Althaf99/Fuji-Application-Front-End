@@ -9,8 +9,8 @@ const useUpdateDeliveryNote = ({ id }) => {
     async (obj) => await axios.put(url, obj),
     {
       onSuccess: async () => {
-        QueryClient.invalidateQueries();
-      },
+        QueryClient.invalidateQueries("deliveryNoteData");
+            },
     },
     {
       onError: async () => {

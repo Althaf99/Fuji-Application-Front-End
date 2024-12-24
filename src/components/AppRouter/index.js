@@ -9,12 +9,16 @@ import SideNavBar from "../SideNavBar";
 import ListPurchaseOrder from "../../pages/PurchaseOrder/ListPurchaseOrder";
 import ListInvoice from "../../pages/Invoice/List-Invoice";
 import ListDeliveryNote from "../../pages/DeliveryNote/List-DeliveryNote";
+import ListStock from "../../pages/Stock/ListStock";
+
 import { InvoicePrinter } from "../../components/Printers/InvoicePrinter";
 import { DeliveryNotePrinter } from "../../components/Printers/DeliveryNotePrinter";
+
 import AddItems from "../../pages/AddItems";
 import ListExcess from "../../pages/Excess";
 import Dashboard from "../../pages/Dashboard";
 import LoginForm from "../../pages/Login";
+
 import { ExcessSheetPrinter } from "../Printers/ExcessSheetPrinter";
 
 const AppRouter = () => {
@@ -31,6 +35,8 @@ const AppRouter = () => {
           <Route path="deliveryNotePrinter" element={<DeliveryNotePrinter />} />
           <Route path="addItems" element={<AddItems />} />
           <Route path="excess" element={<ListExcess />} />
+          <Route path="stock" element={<ListStock />} />
+          <Route path="stockPrinter" element={<ListStock />} />
           <Route path="excessSheetPrinter" element={<ExcessSheetPrinter />} />
         </Route>
       </>

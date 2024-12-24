@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { styles } from "./styles";
@@ -18,13 +18,13 @@ import { PoBalancePrinter } from "../../../components/Printers/PoBalancePrinter/
 import ManageRequest from "../ManageRequest";
 
 import useRequest from "../../../hooks/services/useRequest";
-import useItemNames from "../../../hooks/services/useItemNames";
 import useRequestNumbers from "../../../hooks/services/useRequestNumbers";
-import useItemColors from "../../../hooks/services/useItemColors";
 
 import { formatDate } from "./helper.js";
 
 import ListPurchaseOrderOptionalPanel from "./ListPurchaseOrderOptionalPanel";
+
+import { UserContext } from "../../../components/UserContext/index.jsx";
 
 const ListPurchaseOrder = () => {
   const classes = styles();
@@ -41,8 +41,7 @@ const ListPurchaseOrder = () => {
   const [endDate, setEndDate] = useState(null);
   const [selectedPurchaseOrder, setSelectedPurchaseOrder] = useState();
 
-  const { data: itemColors } = useItemColors();
-  const { data: itemNames } = useItemNames();
+  const { itemNames, itemColors } = useContext(UserContext);
   const { data: requestNumbers } = useRequestNumbers();
 
   const itemNamesArray =

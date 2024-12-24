@@ -51,6 +51,16 @@ const styles = ({ location }) => {
     padding: ${location.pathname === "/purchaseOrder" ? "7px" : "5px"};
   `;
 
+  const stock = css`
+    border-radius: 40px;
+    box-shadow: ${location.pathname === "/stock"
+      ? "0 0 1rem 0 #78c1f3"
+      : "0 0 1.3rem 0 #E5E1DA"};
+    color: ${location.pathname === "/stock" ? "#B2C9AD" : "black"};
+    font-size: ${location.pathname === "/stock" ? "45px" : "40px"};
+    padding: ${location.pathname === "/stock" ? "7px" : "5px"};
+  `;
+
   const addItems = css`
     border-radius: 40px;
     box-shadow: ${location.pathname === "/addItems"
@@ -103,7 +113,7 @@ const styles = ({ location }) => {
     save,
     activeLink,
     link,
-    logout,
+    logout,stock
   };
 };
 export default styles;

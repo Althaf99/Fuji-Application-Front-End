@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-const useUpdateInvoice = ({ id }) => {
+const useUpdateStock = () => {
   const QueryClient = useQueryClient();
-  const url = `http://13.201.133.175:8080/invoice/${id}`;
+  const url = "http://13.201.133.175:8080/stock";
 
   return useMutation(
-    async (obj) => await axios.put(url, obj),
+    async (obj) => await axios.post(url, obj),
     {
       onSuccess: async () => {
-        QueryClient.invalidateQueries("invoiceData");
+        QueryClient.invalidateQueries("stockData");
       },
     },
     {
@@ -20,4 +20,4 @@ const useUpdateInvoice = ({ id }) => {
   );
 };
 
-export default useUpdateInvoice;
+export default useUpdateStock;

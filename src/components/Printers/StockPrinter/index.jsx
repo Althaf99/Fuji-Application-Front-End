@@ -6,9 +6,9 @@ import PrintableTable from "../../../components/PrintableTable";
 
 import { styles } from "./styles";
 
-import useReport from "../../../hooks/services/useReport";
 
 import { formatDate } from "../../../pages/PurchaseOrder/ManageRequest/helper";
+import useStock from "../../../hooks/services/useStock";
 
 const columns = [
   {
@@ -29,73 +29,41 @@ const columns = [
     accessor: "item",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "PO Balance",
-    accessor: "poBalanceQuantity",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-    Cell: ({ value }) => <>{value.toLocaleString()}</>,
+    width: "35%",
   },
   {
     Header: "Stock Balance",
-    accessor: "stockBalanceQuantity",
+    accessor: "quantity",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
     Cell: ({ value }) => <>{value.toLocaleString()}</>,
-  },
-  {
-    Header: "Total Shots",
-    accessor: "totalShots",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "Total Hours",
-    accessor: "totalHours",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
+    width: "25%",
   },
 ];
 
-export const PoBalancePrinter = forwardRef((props, ref) => {
+export const StockPrinter = forwardRef((props, ref) => {
   const classes = styles();
 
-  const { data: report } = useReport();
-
-  report?.sort((a, b) => a.itemName.localeCompare(b.itemName));
-
-  let no = 0;
-  report?.forEach((element) => {
-    no = no + 1;
-    element.no = no;
-    element.item = `${element.itemName} ${element.itemColor}`;
+  const { data: stockData } = useStock({
+    itemName: "",
+    itemColor: "",
   });
 
-  const updatedDataArray = report?.map((obj) => {
-    const totalShots =
-      obj.poBalanceQuantity > obj.stockBalanceQuantity
-        ? (
-            (obj.poBalanceQuantity - obj.stockBalanceQuantity) /
-            obj.cavity
-          ).toFixed(0)
-        : 0;
+  const filteredRequestArray = stockData?.filter(
+    (element) => element.quantity > 0
+  );
 
-    const totalHours =
-      obj.poBalanceQuantity > obj.stockBalanceQuantity
-        ? (
-            ((obj.poBalanceQuantity - obj.stockBalanceQuantity) *
-              obj.cycleTime) /
-            (obj.cavity * 3600)
-          ).toFixed(0)
-        : 0;
+  filteredRequestArray?.sort((a, b) => a.itemName.localeCompare(b.itemName));
 
-    // Return a new object with added properties
-    return {
-      ...obj, // Spread the original properties
-      totalHours,
-      totalShots,
-    };
+  const resultArray = [];
+  let no = 0;
+  filteredRequestArray?.forEach((item) => {
+    no = no + 1;
+      resultArray.push({
+        no: no,
+        item: `${item.itemName} ${item.itemColor}`,
+        quantity: item.quantity,
+      });
   });
 
   const marginTop = "10px";
@@ -108,19 +76,22 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
 
   const pageStyle = `
     @page {
-    size: A4 landscape;
-    margin: 0;
-  }
-  @media print {
-    .printable-container {
+      size: A4;
+    }
+    @media all {
+      .page-break {
+        display: none;
+      }
+    }
+    @media print {
+      .page-break {
+        page-break-before: always;
+      }
       width: 100%;
-      margin: 0 auto;
+      .header, .footer {
+        /* Your header and footer styles from styles.js here */
+      }
     }
-    table {
-      width: 90%;
-      border-collapse: collapse;
-    }
-  }
   `;
 
   return (
@@ -138,16 +109,16 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
           <Grid item>
             <Grid>Date : {formatDate(new Date())}</Grid>
           </Grid>
-          <Grid className={classes.heading}>PO Balance</Grid>
+          <Grid className={classes.heading}>Stock</Grid>
           <Grid className={classes.heading}>
             --------------------------------------------------------------------------------
           </Grid>
         </thead>
         <tbody>
-          {updatedDataArray && columns && (
+          {resultArray && columns && (
             <PrintableTable
               columns={columns}
-              data={updatedDataArray}
+              data={resultArray}
               customProps={{ height: "600px" }}
               hiddenColumns={["id"]}
               fontSize="24px"

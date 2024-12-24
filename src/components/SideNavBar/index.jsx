@@ -16,6 +16,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import UnfoldMoreDoubleOutlinedIcon from "@mui/icons-material/UnfoldMoreDoubleOutlined";
 import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
+import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
 import { Grid } from "@material-ui/core";
 
 import styles from "./styles.js";
@@ -202,6 +203,29 @@ const SideNavBar = () => {
                         location.pathname === "/purchaseOrder"
                           ? "40px"
                           : "16px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <List style={{ paddingBottom: "20px" }}>
+              <Link
+                to="/stock"
+                className={`${classes.link} ${
+                  location.pathname === "/stock" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    <InventoryOutlinedIcon sx={cls.stock} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Stock"
+                    primaryTypographyProps={{
+                      fontSize:
+                        location.pathname === "/stock" ? "21px" : "16px",
+                      fontWeight:
+                        location.pathname === "/stock" ? "40px" : "16px",
                     }}
                   />
                 </ListItem>

@@ -62,17 +62,19 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
   const classes = styles();
 
   const { data: report } = useReport();
-
-  report?.sort((a, b) => a.itemName.localeCompare(b.itemName));
+  const filteredRequestArray = report?.filter(
+    (element) => element.poBalanceQuantity > 0
+  );
+  filteredRequestArray?.sort((a, b) => a.itemName.localeCompare(b.itemName));
 
   let no = 0;
-  report?.forEach((element) => {
+  filteredRequestArray?.forEach((element) => {
     no = no + 1;
     element.no = no;
     element.item = `${element.itemName} ${element.itemColor}`;
   });
 
-  const updatedDataArray = report?.map((obj) => {
+  const updatedDataArray = filteredRequestArray?.map((obj) => {
     const totalShots =
       obj.poBalanceQuantity > obj.stockBalanceQuantity
         ? (

@@ -31,6 +31,18 @@ const columns = [
     cellStyles: { textAlign: "center" },
   },
   {
+    Header: "ItemColor",
+    accessor: "itemColor",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
+    Header: "ItemName",
+    accessor: "itemName",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
     Header: "PO Balance",
     accessor: "poBalanceQuantity",
     headerStyles: { textAlign: "center" },
@@ -65,16 +77,34 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
   const filteredRequestArray = report?.filter(
     (element) => element.poBalanceQuantity > 0
   );
-  filteredRequestArray?.sort((a, b) => a.itemName.localeCompare(b.itemName));
+
+  // Aggregating poBalanceQuantity
+  const aggregatedRequestArray = [];
+  const itemMap = new Map();
+
+  filteredRequestArray?.forEach((item) => {
+    const key = `${item.itemName}-${item.itemColor}`;
+
+    if (itemMap.has(key)) {
+      const existingItem = itemMap.get(key);
+      existingItem.poBalanceQuantity += item.poBalanceQuantity;
+    } else {
+      itemMap.set(key, { ...item });
+    }
+  });
+
+  aggregatedRequestArray.push(...itemMap.values());
+
+  aggregatedRequestArray.sort((a, b) => a.itemName.localeCompare(b.itemName));
 
   let no = 0;
-  filteredRequestArray?.forEach((element) => {
+  aggregatedRequestArray.forEach((element) => {
     no = no + 1;
     element.no = no;
     element.item = `${element.itemName} ${element.itemColor}`;
   });
 
-  const updatedDataArray = filteredRequestArray?.map((obj) => {
+  const updatedDataArray = aggregatedRequestArray.map((obj) => {
     const totalShots =
       obj.poBalanceQuantity > obj.stockBalanceQuantity
         ? (
@@ -92,9 +122,8 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
           ).toFixed(0)
         : 0;
 
-    // Return a new object with added properties
     return {
-      ...obj, // Spread the original properties
+      ...obj,
       totalHours,
       totalShots,
     };
@@ -151,7 +180,7 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
               columns={columns}
               data={updatedDataArray}
               customProps={{ height: "600px" }}
-              hiddenColumns={["id"]}
+              hiddenColumns={["id", "itemName", "itemColor"]}
               fontSize="24px"
               color="#FFFFFF"
             />

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.13dc76f8.css",
-    "main.js": "/static/js/main.ae75a08e.js",
+    "main.js": "/static/js/main.b1974828.js",
     "static/media/Fuji.png": "/static/media/Fuji.85930dc88bd404d9996d.png",
     "index.html": "/index.html",
     "main.13dc76f8.css.map": "/static/css/main.13dc76f8.css.map",
-    "main.ae75a08e.js.map": "/static/js/main.ae75a08e.js.map"
+    "main.b1974828.js.map": "/static/js/main.b1974828.js.map"
   },
   "entrypoints": [
     "static/css/main.13dc76f8.css",
-    "static/js/main.ae75a08e.js"
+    "static/js/main.b1974828.js"
   ]
 }

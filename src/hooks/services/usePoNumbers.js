@@ -11,10 +11,7 @@ const usePoNumbers = (onSuccess, onError) => {
     }
   };
 
-  return useQuery("poNumberList", fetchRequestNumbers, {
-    onSuccess,
-    onError,
-  });
+  return useQuery(["poNumberList"], fetchRequestNumbers, {});
 };
 
 export default usePoNumbers;

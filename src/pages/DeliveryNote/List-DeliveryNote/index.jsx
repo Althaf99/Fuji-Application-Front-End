@@ -162,11 +162,13 @@ const ListDeliveryNote = () => {
     setDateRange(update);
   };
 
+  let total = 0;
   let no = 0;
   deliverNoteData?.forEach((element) => {
     element.item = `${element.itemName} ${element.itemColor}`;
     no = no + 1;
     element.no = no;
+    total = total + element.quantity;
   });
 
   return (
@@ -245,6 +247,14 @@ const ListDeliveryNote = () => {
               value={itemColor}
               items={itemColorsArray}
             />
+          </Grid>
+          <Grid item xs={2} className={classes.section}>
+            <Grid className={classes.totalAmount}>
+              {`Total : ${total.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
+            </Grid>
           </Grid>
         </Grid>
 

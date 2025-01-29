@@ -26,7 +26,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
-    width: "200px",
+    width: "300px",
     position: "fixed",
   },
   drawer: {
@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     display: "grid",
     height: "100vh",
-    // backgroundImage: `url(${IMAGES[2]})`,
-    paddingLeft: "20px",
+    paddingLeft: "5px",
   },
   content: {
     flexGrow: 1,
@@ -89,17 +88,15 @@ const SideNavBar = () => {
                   location.pathname === "/dashboard" ? classes.activeLink : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.home}>
                   <ListItemIcon>
-                    <SpaceDashboardOutlinedIcon sx={cls.home} />
+                    <SpaceDashboardOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Dashboard"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/dashboard" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/dashboard" ? "440px" : "116px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
@@ -115,19 +112,15 @@ const SideNavBar = () => {
                     : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.deliveryNote}>
                   <ListItemIcon>
-                    <LocalShippingOutlinedIcon sx={cls.deliveryNote} />
+                    <LocalShippingOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Delivery Note"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/deliveryNote" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/deliveryNote"
-                          ? "440px"
-                          : "116px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
@@ -140,40 +133,15 @@ const SideNavBar = () => {
                   location.pathname === "/invoice" ? classes.activeLink : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.invoice}>
                   <ListItemIcon>
-                    <PaidOutlinedIcon sx={cls.invoice} />
+                    <PaidOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Invoice"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/invoice" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/invoice" ? "40px" : "16px",
-                    }}
-                  />
-                </ListItem>
-              </Link>
-            </List>
-            <List style={{ paddingBottom: "20px" }}>
-              <Link
-                to="/excess"
-                className={`${classes.link} ${
-                  location.pathname === "/excess" ? classes.activeLink : ""
-                }`}
-              >
-                <ListItem>
-                  <ListItemIcon>
-                    <UnfoldMoreDoubleOutlinedIcon sx={cls.excess} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Excess"
-                    primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/excess" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/excess" ? "40px" : "16px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
@@ -188,72 +156,86 @@ const SideNavBar = () => {
                     : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.po}>
                   <ListItemIcon>
-                    <CloudSyncOutlinedIcon sx={cls.po} />
+                    <CloudSyncOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="PO"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/purchaseOrder"
-                          ? "21px"
-                          : "16px",
-                      fontWeight:
-                        location.pathname === "/purchaseOrder"
-                          ? "40px"
-                          : "16px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
               </Link>
             </List>
             <List style={{ paddingBottom: "20px" }}>
+              <Link
+                to="/excess"
+                className={`${classes.link} ${
+                  location.pathname === "/excess" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem sx={cls.excess}>
+                  <ListItemIcon>
+                    <UnfoldMoreDoubleOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Excess"
+                    primaryTypographyProps={{
+                      fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <Divider />
+            <List>
               <Link
                 to="/stock"
                 className={`${classes.link} ${
                   location.pathname === "/stock" ? classes.activeLink : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.stock}>
                   <ListItemIcon>
-                    <InventoryOutlinedIcon sx={cls.stock} />
+                    <InventoryOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Stock"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/stock" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/stock" ? "40px" : "16px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
               </Link>
             </List>
-            <List style={{ paddingBottom: "20px" }}>
+            <Divider />
+            <List>
               <Link
                 to="/addItems"
                 className={`${classes.link} ${
                   location.pathname === "/addItems" ? classes.activeLink : ""
                 }`}
               >
-                <ListItem>
+                <ListItem sx={cls.addItems}>
                   <ListItemIcon>
-                    <FactoryOutlinedIcon sx={cls.addItems} />
+                    <FactoryOutlinedIcon sx={cls.icon} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Create Items"
                     primaryTypographyProps={{
-                      fontSize:
-                        location.pathname === "/addItems" ? "21px" : "16px",
-                      fontWeight:
-                        location.pathname === "/addItems" ? "40px" : "16px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>
               </Link>
             </List>
+            <Divider />
             <List style={{ paddingBottom: "20px" }}>
               <Link to="/" className={`${classes.link}`}>
                 <ListItem>
@@ -263,8 +245,8 @@ const SideNavBar = () => {
                   <ListItemText
                     primary="Logout"
                     primaryTypographyProps={{
-                      fontSize: "16px",
-                      fontWeight: "16px",
+                      fontSize: "18px",
+                      fontWeight: "440px",
                     }}
                   />
                 </ListItem>

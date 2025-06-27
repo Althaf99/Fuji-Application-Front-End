@@ -4,7 +4,7 @@ import axios from "axios";
 const usePoNumbers = (onSuccess, onError) => {
   const fetchRequestNumbers = async () => {
     try {
-      const data = await axios.get("http://13.201.133.175:8080/requestNumbers");
+      const data = await axios.get("http://localhost:8080/requestNumbers");
       return data?.data;
     } catch (e) {
       return Promise.reject(e);

@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useAddInvoiceNo = ({ requestNo, invoiceDate, invoiceNo }) => {
   const QueryClient = useQueryClient();
-  const useURL = `http://13.201.133.175:8080/AddInvoice/${requestNo}/${invoiceDate}/${invoiceNo}`;
+  const useURL = `http://localhost:8080/AddInvoice/${requestNo}/${invoiceDate}/${invoiceNo}`;
 
   return useMutation(
     (obj) => axios.put(useURL, JSON.stringify(obj)).then((x) => x.json()),

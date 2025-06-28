@@ -1,8 +1,17 @@
 html {
-  font-family: Roboto, Helvetica, sans-serif,Poppins;
+  font-family: Roboto, Helvetica, sans-serif, Poppins;
 
   /* 👇️ or use Operating system default fonts 👇️ */
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
+  font-size: 14px; /* Reduced from default (usually 16px) */
+}
+
+body,
+input,
+button,
+select,
+textarea {
+  font-size: 1em; /* Ensures all text elements scale down */
 }

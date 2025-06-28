@@ -10,7 +10,11 @@ export const styles = makeStyles((theme) => ({
     justifyContent: "center",
     minHeight: "100vh",
   },
+  templateTitle: {
+    fontSize: "1rem", // reduced from default
+  },
   itemChart: {
     padding: "15px",
+    fontSize: "0.9rem", // reduced from default
   },
 }));

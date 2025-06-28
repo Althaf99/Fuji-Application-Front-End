@@ -93,7 +93,10 @@ const ByItemName = ({ chartWidth }) => {
     <Paper className={classes.itemChart}>
       <Grid item container justifyContent={"space-between"}>
         <Grid item xs={6}>
-          <Typography variant="h5" sx={classes.templateTitle}>
+          <Typography
+            variant="h5"
+            sx={{ ...classes.templateTitle, fontSize: "1rem" }}
+          >
             Filtered By Item Name
           </Typography>
         </Grid>

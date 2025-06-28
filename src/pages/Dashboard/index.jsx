@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 
 import PageLayout from "../../components/PageLayout";
 
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 
 import { styles } from "./styles";
 
 import IncomeByMonth from "./incomeByMonth.jsx";
 import ByItemName from "./byItemName.jsx";
+import AreaChart from "./AreaChart.jsx";
+import PaymentStatusPie from "./PaymentStatusPie.jsx";
+import useInvoice from "../../hooks/services/useInvoice.js";
+import LineChart from "./LineChart.jsx";
+import BarChart from "./BarChart.jsx";
 
 const Dashboard = () => {
   const classes = styles();
 
   const [chartWidth, setChartWidth] = useState(window.innerWidth);
+
+  const { data: invoiceData } = useInvoice({});
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,14 +37,40 @@ const Dashboard = () => {
   return (
     <Grid container classes={{ container: classes.gridContainer }}>
       <PageLayout pageHeading={"Dashboard"}>
-        <Grid item container justifyContent={"space-between"} spacing={1}>
-          <Grid item xs={12}>
-            <ByItemName chartWidth={chartWidth} />
+        {invoiceData && (
+          <Grid item container justifyContent={"space-between"} spacing={1}>
+            <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <ByItemName chartWidth={chartWidth} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <IncomeByMonth chartWidth={chartWidth} />
+              </Paper>
+            </Grid>
+            {/* <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <AreaChart chartWidth={chartWidth} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <LineChart chartWidth={chartWidth} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <PaymentStatusPie chartWidth={chartWidth} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={2} style={{ padding: 16 }}>
+                <BarChart chartWidth={chartWidth} />
+              </Paper>
+            </Grid> */}
           </Grid>
-          <Grid item xs={12}>
-            <IncomeByMonth chartWidth={chartWidth} />
-          </Grid>
-        </Grid>
+        )}
       </PageLayout>
     </Grid>
   );

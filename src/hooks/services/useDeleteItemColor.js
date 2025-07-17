@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useDeleteItemColor = ({ id }) => {
   const QueryClient = useQueryClient();
-  const deleteInvoiceItem = `http://13.201.133.175:8080/itemColors/${id}`;
+  const deleteInvoiceItem = `http://localhost:8080/itemColors/${id}`;
 
   return useMutation(
     (obj) =>

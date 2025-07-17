@@ -69,6 +69,8 @@ const ListDeliveryNote = () => {
     endDate: endDate ? formatDate(endDate) : null,
   });
 
+  console.log("deliverNoteData", deliverNoteData);
+
   const columns = [
     {
       Header: "ID",

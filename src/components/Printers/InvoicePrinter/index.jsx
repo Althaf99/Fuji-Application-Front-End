@@ -25,6 +25,13 @@ const columns = [
     width: "5%",
   },
   {
+    Header: "I No",
+    accessor: "invoiceNo",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+    width: "5%",
+  },
+  {
     Header: "Description",
     accessor: "item",
     headerStyles: { textAlign: "center" },
@@ -87,6 +94,8 @@ export const InvoicePrinter = forwardRef((props, ref) => {
     no = no + 1;
     element.no = no;
   });
+
+  console.log("invoiceData,", invoiceData);
 
   const filteredObject = invoiceData?.filter(
     (obj) => obj.invoiceNo == props.invoiceNo

@@ -78,6 +78,8 @@ const ListInvoice = () => {
     endDate: endDate ? formatDate(endDate) : null,
   });
 
+  console.log("invoiceData1", invoiceData);
+
   const invoiceNoArray =
     invoiceData &&
     invoiceData.length > 0 &&

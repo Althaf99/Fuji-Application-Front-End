@@ -32,6 +32,13 @@ const columns = [
     cellStyles: { textAlign: "center" },
   },
   {
+    Header: "Date",
+    accessor: "deliveryDate",
+    // Cell: ({ value }) => formatDate(value),
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
     Header: "Description",
     accessor: "description",
     headerStyles: { textAlign: "center" },

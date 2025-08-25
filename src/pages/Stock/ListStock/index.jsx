@@ -33,9 +33,7 @@ const ListStock = () => {
   const [itemColor, setItemColor] = useState();
   const [selectedStock, setSelectedStock] = useState();
 
-
-  const [openStockDialogBox, setOpenStockDialogBox] =
-    useState(false);
+  const [openStockDialogBox, setOpenStockDialogBox] = useState(false);
 
   const { itemNames, itemColors } = useContext(UserContext);
 
@@ -60,12 +58,11 @@ const ListStock = () => {
     itemColor: itemColor,
   });
 
-
   const columns = [
     {
       Header: "ID",
       accessor: "id",
-    },  
+    },
     {
       Header: "No",
       accessor: "no",
@@ -133,7 +130,6 @@ const ListStock = () => {
       state: { date: formatDate(new Date()) },
     });
   };
-
 
   let no = 0;
   stockData?.forEach((element) => {
@@ -218,8 +214,7 @@ const ListStock = () => {
               hiddenColumns={["id", "itemName", "itemColor"]}
               maxHeightInRows={15}
               customProps={{ height: "565px" }}
-              onClickTableRow={(index, row) => {
-              }}
+              onClickTableRow={(index, row) => {}}
             />
           )}
         </Grid>

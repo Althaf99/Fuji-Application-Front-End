@@ -15,7 +15,7 @@ import useDeliveryNote from "../../hooks/services/useDeliveryNote.js";
 const ByItem = () => {
   const classes = styles();
 
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 

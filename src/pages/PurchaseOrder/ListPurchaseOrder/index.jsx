@@ -36,7 +36,7 @@ const ListPurchaseOrder = () => {
   const [requestNumber, setRequestNumber] = useState("");
   const [list, setList] = useState(0);
   const [openPurchaseOrder, setOpenPurchaseOrder] = useState(false);
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedPurchaseOrder, setSelectedPurchaseOrder] = useState();

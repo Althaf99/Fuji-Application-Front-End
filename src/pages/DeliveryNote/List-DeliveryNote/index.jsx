@@ -31,7 +31,7 @@ const ListDeliveryNote = () => {
 
   const [itemName, setItemName] = useState();
   const [itemColor, setItemColor] = useState();
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedDelivery, setSelectedDelivery] = useState();

@@ -139,7 +139,7 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
 
   const pageStyle = `
     @page {
-    size: A4 landscape;
+    size: A4 portrait;
     margin: 0;
   }
   @media print {
@@ -180,7 +180,7 @@ export const PoBalancePrinter = forwardRef((props, ref) => {
               columns={columns}
               data={updatedDataArray}
               customProps={{ height: "600px" }}
-              hiddenColumns={["id", "itemName", "itemColor"]}
+              hiddenColumns={["id", "itemName", "itemColor","totalShots","totalHours"]}
               fontSize="24px"
               color="#FFFFFF"
             />

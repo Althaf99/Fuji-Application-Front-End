@@ -65,6 +65,14 @@ const IncomeByMonth = ({ chartWidth }) => {
       });
     }
   });
+
+  // Sort the finalArray by monthYear in ascending order
+  finalArray.sort((a, b) => {
+    const dateA = new Date(`01 ${a.month}`); // Convert month to a comparable date
+    const dateB = new Date(`01 ${b.month}`);
+    return dateA - dateB;
+  });
+
   const chartSetting = {
     yAxis: [],
     width: `${chartWidth}`,

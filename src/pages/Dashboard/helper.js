@@ -17,8 +17,11 @@ function formatDate(date) {
 function changeIntoMonths(date) {
   const [day, month, year] = date.split("-");
   const dateObject = new Date(year, month - 1, day);
-  const monthName = dateObject.toLocaleString("default", { month: "long" });
-  return monthName;
+  if (isNaN(dateObject)) {
+    return null; // Return null for invalid dates
+  }
+  const monthYear = dateObject.toLocaleString("default", { month: "long", year: "numeric" });
+  return monthYear; // Returns format like "January 2023"
 }
 
 export { formatDate, changeIntoMonths };

@@ -28,11 +28,13 @@ import useInvoice from "../../../hooks/services/useInvoice";
 import useAddInvoiceNo from "../../../hooks/services/useAddInvoiceNo";
 
 import { UserContext } from "../../../components/UserContext/index.jsx";
+import { InvoiceSummaryPrinter } from "../../../components/Printers/InvoicePrinter/InvoiceSummaryPrinter";
 
 const ListInvoice = () => {
   const classes = styles();
 
   const componentRef = useRef();
+  const summaryPrinterRef = useRef();
   const navigate = useNavigate();
 
   const [itemName, setItemName] = useState("");
@@ -42,7 +44,7 @@ const ListInvoice = () => {
   const [openInvoiceDialog, setOpenInvoiceDialog] = useState(false);
   const [invoiceNo, setInvoiceNo] = useState(0);
   const [searchInvoiceNo, setSearchInvoiceNo] = useState("");
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -322,6 +324,24 @@ const ListInvoice = () => {
                   invoiceNo={invoiceNo}
                   amount={list}
                 ></InvoicePrinter>
+              </div>
+            </Grid>
+            <Grid item>
+              <ReactToPrint
+                trigger={() => (
+                  <Button
+                    id="btn-print-summary"
+                    variant="contained"
+                  >
+                    <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
+                    {"Print Summary"}
+                  </Button>
+                )}
+                content={() => summaryPrinterRef.current}
+                documentTitle="Invoice Summary"
+              />
+              <div style={{ display: "none" }}>
+                <InvoiceSummaryPrinter ref={summaryPrinterRef} />
               </div>
             </Grid>
           </Grid>

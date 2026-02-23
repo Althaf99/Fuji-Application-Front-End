@@ -54,13 +54,14 @@ const ListInvoice = () => {
   const [selectedInvoice, setSelectedInvoice] = useState();
 
   const { itemNames, itemColors } = useContext(UserContext);
-
+  console.log("itemNames",itemNames);
   const itemNamesArray =
     itemNames &&
     itemNames.length > 0 &&
-    itemNames.map(({ id, itemName }) => ({
+    itemNames.map(({ id, itemName,weightPerPiece }) => ({
       name: itemName,
       value: itemName,
+      weightPerPiece:weightPerPiece,
     }));
 
   const itemColorsArray =
@@ -79,6 +80,7 @@ const ListInvoice = () => {
     startDate: startDate ? formatDate(startDate) : null,
     endDate: endDate ? formatDate(endDate) : null,
   });
+  console.log("invoiceData", invoiceData);
 
   const invoiceNoArray =
     invoiceData &&
@@ -122,6 +124,28 @@ const ListInvoice = () => {
         filteredPOList.push(item);
       }
     });
+
+  const materialCostPerKg = 480; // Material cost per Kg
+
+  // Add material cost calculation to invoiceData
+  invoiceData?.forEach((invoice) => {
+    const matchedItem = itemNamesArray?.find((item) => item.value === invoice.itemName);
+    if (matchedItem && matchedItem.weightPerPiece) {
+      invoice.materialCost = ((matchedItem.weightPerPiece * invoice.quantity * materialCostPerKg) / 1000).toFixed(2);
+    } else {
+      invoice.materialCost = 0; // Default to 0 if no match or weightPerPiece is missing
+    }
+  });
+
+  // Calculate total material cost
+  let totalMaterialCost = 0;
+  invoiceData?.forEach((invoice) => {
+    const matchedItem = itemNamesArray?.find((item) => item.value === invoice.itemName);
+    if (matchedItem && matchedItem.weightPerPiece) {
+      const materialCost = (matchedItem.weightPerPiece * invoice.quantity * materialCostPerKg) / 1000;
+      totalMaterialCost += materialCost;
+    }
+  });
 
   const columns = [
     {
@@ -214,6 +238,21 @@ const ListInvoice = () => {
       width: "15%",
     },
     {
+      Header: "Material Cost",
+      accessor: "materialCost",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      width: "15%",
+      Cell: ({ value }) => (
+        <>
+          {parseFloat(value).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </>
+      ),
+    },
+    {
       Header: "Actions",
       accessor: "actions",
       headerStyles: { textAlign: "center" },
@@ -256,6 +295,11 @@ const ListInvoice = () => {
     test ? test.forEach((element) => setList((sum += element))) : setList(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestNumbersArray, itemColorsArray, itemNamesArray]);
+
+
+ 
+
+
 
   useEffect(() => {
     const invoiceList =
@@ -356,6 +400,12 @@ const ListInvoice = () => {
           </Grid>
           <Grid item className={classes.totalAmount}>
             {`Invoice No : ${invoiceNo}`}
+          </Grid>
+          <Grid item className={classes.totalAmount}>
+            {`Total Material Cost : ${totalMaterialCost.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}
           </Grid>
         </Grid>
         <Grid container spacing={2} className={classes.topCards}>

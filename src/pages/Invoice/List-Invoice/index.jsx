@@ -54,7 +54,6 @@ const ListInvoice = () => {
   const [selectedInvoice, setSelectedInvoice] = useState();
 
   const { itemNames, itemColors } = useContext(UserContext);
-  console.log("itemNames",itemNames);
   const itemNamesArray =
     itemNames &&
     itemNames.length > 0 &&
@@ -80,7 +79,6 @@ const ListInvoice = () => {
     startDate: startDate ? formatDate(startDate) : null,
     endDate: endDate ? formatDate(endDate) : null,
   });
-  console.log("invoiceData", invoiceData);
 
   const invoiceNoArray =
     invoiceData &&
@@ -275,7 +273,7 @@ const ListInvoice = () => {
   ];
   const { mutateAsync: clusterUpdater } = useAddInvoiceNo({
     requestNo: requestNumber,
-    invoiceDate: formatDate(startDate),
+    invoiceDate: formatDate(endDate),
     invoiceNo: invoiceNo,
   });
 
@@ -302,19 +300,22 @@ const ListInvoice = () => {
 
 
   useEffect(() => {
-    const invoiceList =
-      (requestNumber?.length > 0 || searchInvoiceNo > 0) &&
-      invoiceData &&
-      invoiceData?.find((element) => element?.invoiceNo);
-
-    setInvoiceNo(invoiceList ? invoiceList.invoiceNo : 0);
+    if (endDate) {
+      // Only send the request if the end date is selected
+      const invoiceList =
+        (requestNumber?.length > 0 || searchInvoiceNo > 0) &&
+        invoiceData &&
+        invoiceData?.find((element) => element?.invoiceNo);
+  
+      setInvoiceNo(invoiceList ? invoiceList.invoiceNo : 0);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, requestNumber, invoiceData]);
+  }, [endDate, requestNumber, invoiceData]);
 
-  useEffect(() => {
-    setStartDate(dateRange[0]);
-    setEndDate(dateRange[1]);
-  }, [dateRange]);
+  // useEffect(() => {
+  //   setStartDate(dateRange[0]);
+  //   setEndDate(dateRange[1]);
+  // }, [dateRange]);
 
   const handlePrintInvoice = () => {
     navigate(`/invoicePrinter`);
@@ -328,7 +329,9 @@ const ListInvoice = () => {
   });
 
   const onChange = (update) => {
-    setDateRange(update);
+    // setDateRange(update);
+    setStartDate(update[0]);
+    setEndDate(update[1]);
   };
 
   return (
@@ -385,7 +388,11 @@ const ListInvoice = () => {
                 documentTitle="Invoice Summary"
               />
               <div style={{ display: "none" }}>
-                <InvoiceSummaryPrinter ref={summaryPrinterRef} />
+                <InvoiceSummaryPrinter ref={summaryPrinterRef} 
+                 startDate={startDate}
+                 endDate={endDate}
+                 invoiceData={invoiceData}
+                />
               </div>
             </Grid>
           </Grid>

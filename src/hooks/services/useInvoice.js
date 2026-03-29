@@ -5,59 +5,31 @@ const useInvoice = ({
   itemName,
   itemColor,
   requestNumber,
-  requestDate,
   invoiceNo,
-  startDate,
+  requestDate,
   endDate,
+  startDate
 }) => {
   const fetchRequest = async () => {
     const query = new URLSearchParams();
-    if (itemName) {
-      query.append("itemName", itemName);
-    }
-    if (itemColor) {
-      query.append("itemColor", itemColor);
-    }
-    if (requestNumber) {
-      query.append("po", requestNumber);
-    }
-    if (requestDate) {
-      query.append("poDate", requestDate);
-    }
-    if (invoiceNo) {
-      query.append("invoiceNo", invoiceNo);
-    }
+    if (itemName) query.append("itemName", itemName);
+    if (itemColor) query.append("itemColor", itemColor);
+    if (requestNumber) query.append("po", requestNumber);
+    if (invoiceNo) query.append("invoiceNo", invoiceNo);
+    if (requestDate) query.append("poDate", requestDate);
+    if (endDate) query.append("endDate", endDate);
+    if (startDate) query.append("startDate", startDate);
 
-    if (startDate) {
-      query.append("startDate", startDate);
-    }
-    if (endDate) {
-      query.append("endDate", endDate);
-    }
-    try {
-      const data = await axios.get(
-        `http://localhost:8080/invoiceList?${query.toString()}`
-      );
-
-      return data.data;
-    } catch (e) {
-      return Promise.reject(e);
-    }
+    const response = await axios.get( `http://localhost:8080/invoiceList?${query.toString()}`);
+    return response.data;
   };
 
+  // Use the dependencies in the query key to trigger re-fetching
   return useQuery(
-    [
-      "invoiceData",
-      itemName,
-      itemColor,
-      requestNumber,
-      invoiceNo,
-      requestDate,
-      endDate,
-    ],
+    ["invoices", itemName, itemColor, requestNumber, invoiceNo, requestDate, endDate, startDate],
     fetchRequest,
     {
-      refetchOnWindowFocus: false,
+      enabled: !!(itemName || itemColor || requestNumber || invoiceNo || requestDate || endDate), // Ensure at least one dependency is truthy
     }
   );
 };

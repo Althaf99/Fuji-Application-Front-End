@@ -4,9 +4,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PrintableTable from "../../../components/PrintableTable";
 import { styles } from "./Styles";
-import useInvoicesByDateRange from "../../../hooks/services/useInvoicesByDateRange";
 
 const columns = [
+  {
+    Header: "No",
+    accessor: "no",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+    width: "5%",
+  },
+  {
+    Header: "Invoice Date",
+    accessor: "invoiceDate",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
   {
     Header: "Invoice No",
     accessor: "invoiceNo",
@@ -30,23 +42,15 @@ const columns = [
 ];
 
 export const InvoiceSummaryPrinter = forwardRef((props, ref) => {
+ const startDate =  props.startDate; 
+ const endDate =  props.startDate; 
+ const data =  props.invoiceData; 
   const classes = styles();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [filteredData, setFilteredData] = useState([]);
 
-  const { data: invoices } = useInvoicesByDateRange({
-    startDate: startDate && !isNaN(new Date(startDate)) ? startDate.toISOString() : null,
-    endDate: endDate && !isNaN(new Date(endDate)) ? endDate.toISOString() : null,
-  });
+ 
 
-  useEffect(() => {
-    if (invoices) {
-      setFilteredData(invoices);
-    }
-  }, [invoices]);
 
-  const totalAmount = filteredData.reduce((sum, invoice) => sum + invoice.amount, 0);
+  const totalAmount = data?.reduce((sum, invoice) => sum + invoice.amount, 0);
 
   const pageStyle = `
     @page {
@@ -62,27 +66,11 @@ export const InvoiceSummaryPrinter = forwardRef((props, ref) => {
   return (
     <div ref={ref} className={classes.body}>
       <Grid container classes={{ container: classes.gridContainer }}>
-        <Grid item container spacing={2} justifyContent="space-between">
-          <Grid item>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              placeholderText="Start Date"
-            />
-          </Grid>
-          <Grid item>
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              placeholderText="End Date"
-            />
-          </Grid>
-        </Grid>
         <Grid item xs={12}>
-          {filteredData && columns && (
+          {data && columns && (
             <PrintableTable
               columns={columns}
-              data={filteredData}
+              data={data}
               fontSize="24px"
               color="#FFFFFF"
             />
@@ -90,7 +78,7 @@ export const InvoiceSummaryPrinter = forwardRef((props, ref) => {
         </Grid>
         <Grid item className={classes.totalAmount}>
           Total:{" "}
-          {totalAmount.toLocaleString(undefined, {
+          {totalAmount?.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}

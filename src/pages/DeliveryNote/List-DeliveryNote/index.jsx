@@ -31,15 +31,9 @@ const ListDeliveryNote = () => {
 
   const [itemName, setItemName] = useState();
   const [itemColor, setItemColor] = useState();
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [selectedDelivery, setSelectedDelivery] = useState();
-
-  useEffect(() => {
-    setStartDate(dateRange[0]);
-    setEndDate(dateRange[1]);
-  }, [dateRange]);
 
   const [openDeliveryNoteDialogBox, setOpenDeliveryNoteDialogBox] =
     useState(false);
@@ -159,7 +153,8 @@ const ListDeliveryNote = () => {
   };
 
   const onChange = (update) => {
-    setDateRange(update);
+    setStartDate(update[0]);
+    setEndDate(update[1]);
   };
 
   let total = 0;

@@ -4,26 +4,18 @@ import axios from "axios";
 const useDeliveryNote = ({ itemName, itemColor, startDate, endDate }) => {
   const fetchDeliveryNote = async () => {
     const query = new URLSearchParams();
-    if (itemName) {
-      query.append("itemName", itemName);
-    }
-    if (itemColor) {
-      query.append("itemColor", itemColor);
-    }
-    if (startDate) {
-      query.append("startDate", startDate);
-    }
-    if (endDate) {
-      query.append("endDate", endDate);
-    }
+    if (itemName) query.append("itemName", itemName);
+    if (itemColor) query.append("itemColor", itemColor);
+    if (endDate) query.append("endDate", endDate);
+    if (startDate) query.append("startDate", startDate);
+  
     try {
       const data = await axios.get(
         `http://localhost:8080/deliveryNote?${query.toString()}`
       );
-
-      return data.data;
+      return data.data; 
     } catch (e) {
-      return Promise.reject(e);
+      return Promise.reject(e); 
     }
   };
 
@@ -31,7 +23,8 @@ const useDeliveryNote = ({ itemName, itemColor, startDate, endDate }) => {
     ["deliveryNoteData", itemName, itemColor, endDate],
     fetchDeliveryNote,
     {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false, 
+      enabled: !!endDate, 
     }
   );
 };

@@ -4,7 +4,7 @@ import ReactToPrint from "react-to-print";
 import { styles } from "./styles";
 
 import { Button } from "@mui/material";
-import { Grid, FormControl } from "@material-ui/core";
+import { Grid, FormControl,Typography,TextField } from "@material-ui/core";
 import NoteAddTwoToneIcon from "@mui/icons-material/NoteAddTwoTone";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalPrintshopTwoToneIcon from "@mui/icons-material/LocalPrintshopTwoTone";
@@ -78,7 +78,7 @@ const ListPurchaseOrder = () => {
 
   useEffect(() => {
     let sum = 0;
-    const test = requestData && requestData.map((item) => item.quantity);
+    const test = requestData && requestData.map((item) => item.quantity * item.unitPrice);
     test && test.forEach((element) => setList((sum += element)));
   }, [requestNumbersArray, itemColorsArray, itemNamesArray]);
 
@@ -285,9 +285,17 @@ const ListPurchaseOrder = () => {
               items={itemColorsArray}
             />
           </Grid>
-          {/* <Grid item xs={0} className={classes.totalAmount}>
-              {list}
-            </Grid> */}
+          <Grid item xs={2} className={classes.section}>
+            <TextField
+              label="Total Amount"
+              id="list"
+              name="list"
+              value={list.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            />
+          </Grid>
         </Grid>
 
         <Grid item className={classes.section} xs={12}>

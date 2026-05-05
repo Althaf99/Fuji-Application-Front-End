@@ -43,8 +43,8 @@ const ListInvoice = () => {
   const [list, setList] = useState(0);
   const [openInvoiceDialog, setOpenInvoiceDialog] = useState(false);
   const [invoiceNo, setInvoiceNo] = useState(0);
+  const [notes, setNotes] = useState("");
   const [searchInvoiceNo, setSearchInvoiceNo] = useState("");
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -90,7 +90,6 @@ const ListInvoice = () => {
 
   const uniqueInvoiceNo = new Set();
 
-  // Create a new array without duplicate values
   const filteredInvoiceList = [];
 
   invoiceNoArray &&
@@ -112,7 +111,6 @@ const ListInvoice = () => {
 
   const uniqueValues = new Set();
 
-  // Create a new array without duplicate values
   const filteredPOList = [];
   requestNumbersArray &&
     requestNumbersArray.forEach((item) => {
@@ -311,11 +309,6 @@ const ListInvoice = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endDate, requestNumber, invoiceData]);
-
-  // useEffect(() => {
-  //   setStartDate(dateRange[0]);
-  //   setEndDate(dateRange[1]);
-  // }, [dateRange]);
 
   const handlePrintInvoice = () => {
     navigate(`/invoicePrinter`);

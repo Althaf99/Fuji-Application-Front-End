@@ -2,7 +2,7 @@ import { AppRouter } from "../AppRouter";
 import { RouterProvider } from "react-router-dom";
 import ThemeDefault from "../../themes/default";
 import "react-datepicker/dist/react-datepicker.css";
-import { ThemeProvider, CssBaseline, Grid } from "@material-ui/core";
+import { ThemeProvider, CssBaseline, Grid } from "@mui/material";
 import { UserProvider } from "../UserContext";
 
 const App = () => {

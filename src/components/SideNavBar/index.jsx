@@ -17,7 +17,7 @@ import UnfoldMoreDoubleOutlinedIcon from "@mui/icons-material/UnfoldMoreDoubleOu
 import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 import styles from "./styles.js";
 import { Logout } from "@mui/icons-material";

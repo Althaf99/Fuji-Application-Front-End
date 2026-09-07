@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 import PageLayout from "../../components/PageLayout";
 import TemplateTypeTile from "../../components/TemplateTypeTile/index.jsx";

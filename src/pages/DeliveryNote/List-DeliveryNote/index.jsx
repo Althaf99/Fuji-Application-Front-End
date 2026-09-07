@@ -5,8 +5,7 @@ import ReactToPrint from "react-to-print";
 import OptionPanel from "./deliveryNoteOptionalPanel.js";
 import { styles } from "./styles";
 
-import { Button } from "@mui/material";
-import { Grid, FormControl } from "@material-ui/core";
+import { Button, Grid, FormControl } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 import LazyLoadingTable from "../../../components/LazyLoadingTable";

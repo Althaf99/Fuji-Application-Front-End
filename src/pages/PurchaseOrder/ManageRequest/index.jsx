@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { useFormik } from "formik";
 
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
+import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
 import { Button } from "@mui/material";
 import LoupeRoundedIcon from "@mui/icons-material/LoupeRounded";
 

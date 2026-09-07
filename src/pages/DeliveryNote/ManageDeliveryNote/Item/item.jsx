@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
-import FormControl from "@material-ui/core/FormControl";
+import FormControl from "@mui/material/FormControl";
 
 import LabelledEditableSelect from "../../../../components/LabelledEditableSelect";
 import LazyLoadingTable from "../../../../components/LazyLoadingTable";

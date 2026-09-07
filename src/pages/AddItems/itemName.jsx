@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Grid } from "@mui/material";
-import FormControl from "@material-ui/core/FormControl";
+import FormControl from "@mui/material/FormControl";
 
 import LabeledTextField from "../../components/LabeledTextField";
 import DialogBox from "../../components/DialogBox";

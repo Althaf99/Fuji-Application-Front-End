@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-import ChipInput from "material-ui-chip-input";
+import { makeStyles } from "@mui/styles";
+import Chip from "@mui/material/Chip";
+import TextField from "@mui/material/TextField";
 
 const useStyles = makeStyles((theme) => ({
   tags: {
@@ -19,44 +20,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
     lineHeight: "19px",
     marginBottom: "1px",
-  },
-  underline: {
-    "&::before": {
-      left: "0",
-      right: "0",
-      bottom: "0",
-      content: '""',
-      position: "absolute",
-      transition: "border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-      borderBottom: "0px solid rgba(0, 0, 0, 0.42)",
-      pointerEvents: "none",
-      "&:hover": {
-        borderBottom: "0 !important",
-      },
-    },
-    "&:hover:not($disabled):not($focused):not($error):before": {
-      borderBottom: "0px !important",
-    },
-    "&::after": {
-      left: "0",
-      right: "0",
-      bottom: "0",
-      content: '""',
-      position: "absolute",
-      transform: "scaleX(0)",
-      transition: "transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms",
-      borderBottom: "0px solid rgba(0, 0, 0, 0.42)",
-      pointerEvents: "none",
-    },
-  },
-  chipback: {
     background: "#B5BDE9",
     color: "#FFFFFF",
-    borderRadius: "18px",
     "&:hover": {
       background: "#B5BDE9",
       color: "#FFFFFF",
-      borderRadius: "18px",
     },
   },
 }));
@@ -65,6 +33,7 @@ const Tags = ({ id, addValues, values, onChange, isEmpty }) => {
   const classes = useStyles();
 
   const [tags, setTags] = useState(values ? [...values] : []);
+  const [inputValue, setInputValue] = useState("");
 
   // Add Chips
   const handleAddChip = (chip) => {
@@ -82,26 +51,46 @@ const Tags = ({ id, addValues, values, onChange, isEmpty }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags]);
 
+  // Add on Enter or blur, matching the previous ChipInput "add" behavior
+  const commitInputValue = () => {
+    const chip = inputValue.trim();
+    if (chip) {
+      handleAddChip(chip);
+    }
+    setInputValue("");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      commitInputValue();
+    }
+  };
+
   return (
-    <ChipInput
-      id={id}
-      placeholder="Add new tag"
-      value={tags}
-      onChange={onChange}
-      onAdd={(chip) => handleAddChip(chip)}
-      onDelete={(chip) => handleDeleteChip(chip)}
-      inputProps={{
-        classes: {
-          root: classes.tags,
-        },
-      }}
-      classes={{
-        chipContainer: classes.chip,
-        underline: classes.underline,
-        chip: classes.chipback,
-      }}
-      blurBehavior="add"
-    />
+    <div className={classes.tags}>
+      {tags.map((tag) => (
+        <Chip
+          key={tag}
+          label={tag}
+          onDelete={() => handleDeleteChip(tag)}
+          className={classes.chip}
+        />
+      ))}
+      <TextField
+        id={id}
+        placeholder="Add new tag"
+        value={inputValue}
+        onChange={(event) => {
+          setInputValue(event.target.value);
+          onChange?.(event.target.value);
+        }}
+        onKeyDown={handleKeyDown}
+        onBlur={commitInputValue}
+        variant="standard"
+        InputProps={{ disableUnderline: true }}
+      />
+    </div>
   );
 };
 

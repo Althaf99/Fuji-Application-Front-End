@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 const randoliBlue = "rgba(0, 24, 71, 1)"; // HEX - #001847
 const randoliBlue2 = "rgba(15, 94, 247, 1)"; // HEX - #0f5ef7

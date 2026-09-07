@@ -1,5 +1,5 @@
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 const columns = [
   {

@@ -6,12 +6,10 @@ import { styles } from "./styles";
 
 import ReactToPrint from "react-to-print";
 
-import { Grid } from "@material-ui/core";
-import { Button } from "@mui/material";
+import { Grid, Button, FormControl } from "@mui/material";
 import NoteAddTwoToneIcon from "@mui/icons-material/NoteAddTwoTone";
 import LocalPrintshopTwoToneIcon from "@mui/icons-material/LocalPrintshopTwoTone";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import FormControl from "@material-ui/core/FormControl";
 
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import PageLayout from "../../../components/PageLayout";

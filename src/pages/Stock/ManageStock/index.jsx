@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useFormik } from "formik";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import { Button, FormControl } from "@mui/material";
 import { useSnackbar } from "notistack";
 

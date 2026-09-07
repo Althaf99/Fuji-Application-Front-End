@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 
 import PrintableTable from "../../../components/PrintableTable";
 

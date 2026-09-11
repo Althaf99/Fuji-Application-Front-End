@@ -17,6 +17,8 @@ import UnfoldMoreDoubleOutlinedIcon from "@mui/icons-material/UnfoldMoreDoubleOu
 import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
+import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
+import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
 import { Grid } from "@mui/material";
 
 import styles from "./styles.js";
@@ -207,6 +209,70 @@ const SideNavBar = () => {
                     primary="Stock"
                     primaryTypographyProps={{
                       fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <Divider />
+            <List>
+              <Link
+                to="/rawMaterialStock"
+                className={`${classes.link} ${
+                  location.pathname === "/rawMaterialStock" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem sx={cls.rawMaterialStock}>
+                  <ListItemIcon>
+                    <InventoryOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Raw Material Stock"
+                    primaryTypographyProps={{
+                      fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+              <Link
+                to="/rawMaterialStock/materials"
+                className={`${classes.link} ${
+                  location.pathname === "/rawMaterialStock/materials"
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                <ListItem sx={cls.rawMaterialStock}>
+                  <ListItemIcon>
+                    <CategoryOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Materials Master"
+                    primaryTypographyProps={{
+                      fontSize: "16px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+              <Link
+                to="/rawMaterialStock/reports"
+                className={`${classes.link} ${
+                  location.pathname === "/rawMaterialStock/reports"
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                <ListItem sx={cls.rawMaterialStock}>
+                  <ListItemIcon>
+                    <AssessmentOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Reports"
+                    primaryTypographyProps={{
+                      fontSize: "16px",
                       fontWeight: "440px",
                     }}
                   />

@@ -10,6 +10,9 @@ import ListPurchaseOrder from "../../pages/PurchaseOrder/ListPurchaseOrder";
 import ListInvoice from "../../pages/Invoice/List-Invoice";
 import ListDeliveryNote from "../../pages/DeliveryNote/List-DeliveryNote";
 import ListStock from "../../pages/Stock/ListStock";
+import ListRawMaterialStock from "../../pages/RawMaterialStock/ListRawMaterialStock";
+import MaterialsMaster from "../../pages/RawMaterialStock/MaterialsMaster";
+import RawMaterialStockReports from "../../pages/RawMaterialStock/Reports";
 
 import { InvoicePrinter } from "../../components/Printers/InvoicePrinter";
 import { DeliveryNotePrinter } from "../../components/Printers/DeliveryNotePrinter";
@@ -38,6 +41,9 @@ const AppRouter = () => {
           <Route path="stock" element={<ListStock />} />
           <Route path="stockPrinter" element={<ListStock />} />
           <Route path="excessSheetPrinter" element={<ExcessSheetPrinter />} />
+          <Route path="rawMaterialStock" element={<ListRawMaterialStock />} />
+          <Route path="rawMaterialStock/materials" element={<MaterialsMaster />} />
+          <Route path="rawMaterialStock/reports" element={<RawMaterialStockReports />} />
         </Route>
       </>
     )

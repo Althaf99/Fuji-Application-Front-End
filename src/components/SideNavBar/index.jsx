@@ -17,6 +17,7 @@ import UnfoldMoreDoubleOutlinedIcon from "@mui/icons-material/UnfoldMoreDoubleOu
 import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 import { Grid } from "@material-ui/core";
 
 import styles from "./styles.js";
@@ -183,6 +184,30 @@ const SideNavBar = () => {
                   </ListItemIcon>
                   <ListItemText
                     primary="Excess"
+                    primaryTypographyProps={{
+                      fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <Divider />
+            <List>
+              <Link
+                to="/rawMaterialStock"
+                className={`${classes.link} ${
+                  location.pathname === "/rawMaterialStock"
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                <ListItem sx={cls.stock}>
+                  <ListItemIcon>
+                    <ShowChartIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Raw Material Stock"
                     primaryTypographyProps={{
                       fontSize: "18px",
                       fontWeight: "440px",

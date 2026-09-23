@@ -18,6 +18,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 import PageLayout from "../../../components/PageLayout";
+import useRawMaterialStock from "../../../hooks/services/useRawMaterialStock";
 
 import { styles } from "../../Stock/ListStock/styles";
 
@@ -27,26 +28,18 @@ const emptyForms = {
     location: "",
     contactPerson: "",
     contactNumber: "",
-    bankName: "",
-    bankAccountNumber: "",
   },
   "Raw Material": {
-    name: "",
     code: "",
     type: "",
     color: "",
-    size: "",
     price: "",
-    vendorId: "",
   },
   "Master Batch": {
-    name: "",
     code: "",
-    type: "",
+    // type: "",
     color: "",
-    size: "",
     price: "",
-    vendorId: "",
   },
   GRN: {
     date: new Date().toISOString().slice(0, 10),
@@ -66,13 +59,6 @@ const emptyForms = {
   },
 };
 
-const initialData = {
-  Vendor: [],
-  "Raw Material": [],
-  "Master Batch": [],
-  GRN: [],
-  Consumption: [],
-};
 const tabNames = [
   "Vendor",
   "Raw Material",
@@ -85,8 +71,6 @@ const labels = {
   location: "Location",
   contactPerson: "Contact Person",
   contactNumber: "Contact Number",
-  bankName: "Bank Name",
-  bankAccountNumber: "Bank Account Number",
   code: "Code",
   type: "Type",
   color: "Color",
@@ -102,44 +86,103 @@ const labels = {
   usedBy: "Used By",
 };
 
+const normalizeGrns = (grns) =>
+  grns.flatMap((grn) =>
+    (grn.items || []).map((item) => ({
+      ...item,
+      id: `${grn.id}-${item.id}`,
+      parentId: grn.id,
+      date: grn.date,
+      vendorId: grn.vendor?.id || grn.vendorId,
+    })),
+  );
+const filterFields = {
+  Vendor: ["name", "location"],
+  "Raw Material": ["type", "color"],
+  "Master Batch": ["code", "color"],
+  GRN: ["date", "vendorId", "itemType", "itemId"],
+  Consumption: ["itemType", "itemId", "machineNo", "moldNo", "usedBy"],
+};
+
 const RawMaterialStockList = () => {
   const classes = styles();
   const [activeTab, setActiveTab] = useState(0);
-  const [records, setRecords] = useState(initialData);
   const [dialogTab, setDialogTab] = useState(null);
   const [editingRecord, setEditingRecord] = useState(null);
   const [form, setForm] = useState(emptyForms.Vendor);
   const [error, setError] = useState("");
+  const [filters, setFilters] = useState({
+    Vendor: { name: "", location: "" },
+    "Raw Material": { type: "", color: "" },
+    "Master Batch": { code: "", color: "" },
+    GRN: { date: "", vendorId: "", itemType: "", itemId: "" },
+    Consumption: {
+      itemType: "",
+      itemId: "",
+      machineNo: "",
+      moldNo: "",
+      usedBy: "",
+    },
+  });
   const activeName = tabNames[activeTab];
+  const {
+    vendors,
+    rawMaterials,
+    masterBatches,
+    grns,
+    consumptions,
+    stock,
+    isLoading,
+    error: queryError,
+    mutateAsync,
+    isSaving,
+  } = useRawMaterialStock();
+  const records = useMemo(
+    () => ({
+      Vendor: vendors,
+      "Raw Material": rawMaterials,
+      "Master Batch": masterBatches,
+      GRN: normalizeGrns(grns),
+      Consumption: consumptions,
+    }),
+    [vendors, rawMaterials, masterBatches, grns, consumptions],
+  );
 
   const availableQuantity = useMemo(() => {
-    const totals = {};
-    records.GRN.forEach((record) => {
-      const key = `${record.itemType}:${record.itemId}`;
-      totals[key] = (totals[key] || 0) + Number(record.quantity || 0);
-    });
-    records.Consumption.forEach((record) => {
-      const key = `${record.itemType}:${record.itemId}`;
-      totals[key] = (totals[key] || 0) - Number(record.quantity || 0);
-    });
-    return totals;
-  }, [records]);
+    return stock.reduce(
+      (totals, row) => ({
+        ...totals,
+        [`${row.itemType}:${row.itemId}`]: row.availableQuantity,
+      }),
+      {},
+    );
+  }, [stock]);
 
   const itemsForType = (itemType) =>
     itemType === "rawMaterial"
       ? records["Raw Material"]
       : records["Master Batch"];
+  const itemDisplay = (item) =>
+    item
+      ? item.type
+        ? `${item.type} - ${item.color} - ${item.code}`
+        : `${item.code} - ${item.color}`
+      : "";
   const displayValue = (record, key) => {
     if (key === "vendorId")
       return (
-        records.Vendor.find((vendor) => vendor.id === record.vendorId)?.name ||
-        ""
+        vendors.find((vendor) => vendor.id === record.vendorId)?.name || ""
       );
     if (key === "itemId")
-      return (
-        itemsForType(record.itemType).find((item) => item.id === record.itemId)
-          ?.name || ""
-      );
+      return itemsForType(record.itemType).find(
+        (item) => item.id === record.itemId,
+      )
+        ? itemDisplay(
+            itemsForType(record.itemType).find(
+              (item) => item.id === record.itemId,
+            ),
+          )
+        : "";
     if (key === "itemType")
       return record.itemType === "rawMaterial"
         ? "Raw Material"
@@ -148,25 +191,11 @@ const RawMaterialStockList = () => {
   };
   const columnsFor = (tab) => {
     if (tab === "Vendor")
-      return [
-        "name",
-        "location",
-        "contactPerson",
-        "contactNumber",
-        "bankName",
-        "bankAccountNumber",
-      ];
-    if (tab === "Raw Material" || tab === "Master Batch")
-      return [
-        "name",
-        "code",
-        "type",
-        "color",
-        "size",
-        "price",
-        "vendorId",
-        "availableQuantity",
-      ];
+      return ["name", "location", "contactPerson", "contactNumber"];
+    if (tab === "Raw Material")
+      return ["code", "type", "color", "price", "availableQuantity"];
+    if (tab === "Master Batch")
+      return ["code", "color", "price", "availableQuantity"];
     if (tab === "GRN")
       return ["date", "vendorId", "itemType", "itemId", "quantity"];
     return [
@@ -187,6 +216,32 @@ const RawMaterialStockList = () => {
           `${activeName === "Raw Material" ? "rawMaterial" : "masterBatch"}:${record.id}`
         ] || 0,
     }));
+  const filteredRows = () => {
+    return getRows().filter((record) =>
+      Object.entries(filters[activeName]).every(
+        ([field, filter]) =>
+          !filter ||
+          String(displayValue(record, field)).toLowerCase() ===
+            String(filter).toLowerCase(),
+      ),
+    );
+  };
+  const filterOptionsFor = (field) =>
+    [
+      ...new Set(
+        getRows()
+          .map((record) => displayValue(record, field))
+          .filter(Boolean),
+      ),
+    ].sort();
+  const clearFilters = () =>
+    setFilters((current) => ({
+      ...current,
+      [activeName]: Object.keys(current[activeName]).reduce(
+        (cleared, field) => ({ ...cleared, [field]: "" }),
+        {},
+      ),
+    }));
   const optionsFor = (field) => {
     if (field === "vendorId")
       return records.Vendor.map((vendor) => ({
@@ -196,7 +251,7 @@ const RawMaterialStockList = () => {
     if (field === "itemId")
       return itemsForType(form.itemType).map((item) => ({
         value: item.id,
-        label: item.name,
+        label: itemDisplay(item),
       }));
     if (field === "itemType")
       return [
@@ -217,9 +272,10 @@ const RawMaterialStockList = () => {
     setError("");
     setDialogTab(activeName);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
     const requiredFields = Object.keys(emptyForms[dialogTab]).filter(
-      (key) => key !== "price",
+      (key) =>
+        key !== "price" || ["Raw Material", "Master Batch"].includes(dialogTab),
     );
     const missingField = requiredFields.find(
       (key) => !String(form[key] || "").trim(),
@@ -246,25 +302,76 @@ const RawMaterialStockList = () => {
         return;
       }
     }
-    const savedRecord = {
-      ...form,
-      id: editingRecord?.id || `${dialogTab}-${Date.now()}`,
-    };
-    setRecords((current) => ({
-      ...current,
-      [dialogTab]: editingRecord
-        ? current[dialogTab].map((record) =>
-            record.id === editingRecord.id ? savedRecord : record,
-          )
-        : [...current[dialogTab], savedRecord],
-    }));
-    setDialogTab(null);
+    const payload =
+      dialogTab === "GRN"
+        ? {
+            date: form.date,
+            vendorId: Number(form.vendorId),
+            items: [
+              {
+                itemType: form.itemType,
+                itemId: Number(form.itemId),
+                quantity: Number(form.quantity),
+              },
+            ],
+          }
+        : dialogTab === "Consumption"
+          ? {
+              date: form.date,
+              itemType: form.itemType,
+              itemId: Number(form.itemId),
+              quantity: Number(form.quantity),
+              machineNo: form.machineNo,
+              moldNo: form.moldNo,
+              usedBy: form.usedBy,
+            }
+          : {
+              ...form,
+              price: form.price === "" ? null : Number(form.price),
+            };
+    const resourcePath = {
+      Vendor: "/vendors",
+      "Raw Material": "/raw-materials",
+      "Master Batch": "/master-batches",
+      GRN: "/grns",
+      Consumption: "/consumptions",
+    }[dialogTab];
+    try {
+      await mutateAsync({
+        method: editingRecord ? "put" : "post",
+        path: editingRecord
+          ? `${resourcePath}/${editingRecord.parentId || editingRecord.id}`
+          : resourcePath,
+        data: payload,
+      });
+      setDialogTab(null);
+    } catch (requestError) {
+      setError(
+        requestError.response?.data?.message ||
+          "Unable to save this record. Please try again.",
+      );
+    }
   };
-  const handleDelete = (record) =>
-    setRecords((current) => ({
-      ...current,
-      [activeName]: current[activeName].filter((item) => item.id !== record.id),
-    }));
+  const handleDelete = async (record) => {
+    const resourcePath = {
+      Vendor: "/vendors",
+      "Raw Material": "/raw-materials",
+      "Master Batch": "/master-batches",
+      GRN: "/grns",
+      Consumption: "/consumptions",
+    }[activeName];
+    try {
+      await mutateAsync({
+        method: "delete",
+        path: `${resourcePath}/${record.parentId || record.id}`,
+      });
+    } catch (requestError) {
+      setError(
+        requestError.response?.data?.message ||
+          "Unable to delete this record. Please try again.",
+      );
+    }
+  };
 
   return (
     <Grid container classes={{ container: classes.gridContainer }}>
@@ -275,11 +382,19 @@ const RawMaterialStockList = () => {
             variant="contained"
             startIcon={<AddCircleOutlineIcon />}
             onClick={openCreate}
+            disabled={isSaving}
           >
             Add {activeName}
           </Button>
         }
       >
+        {queryError && (
+          <Typography color="error" sx={{ mb: 2 }}>
+            Unable to load Raw Material Stock data. Please check that the
+            backend is running.
+          </Typography>
+        )}
+        {isLoading && <Typography sx={{ mb: 2 }}>Loading...</Typography>}
         <Tabs
           value={activeTab}
           onChange={(_, value) => setActiveTab(value)}
@@ -290,13 +405,49 @@ const RawMaterialStockList = () => {
             <Tab key={tab} label={tab} />
           ))}
         </Tabs>
+        <Grid container spacing={2} sx={{ mt: 1, mb: 1 }}>
+          {filterFields[activeName].map((field) => (
+            <Grid item xs={12} sm={6} md={3} key={field}>
+              <TextField
+                select
+                fullWidth
+                size="small"
+                label={labels[field]}
+                value={filters[activeName][field]}
+                onChange={(event) =>
+                  setFilters((current) => ({
+                    ...current,
+                    [activeName]: {
+                      ...current[activeName],
+                      [field]: event.target.value,
+                    },
+                  }))
+                }
+              >
+                <MenuItem value="">All</MenuItem>
+                {filterOptionsFor(field).map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          ))}
+          <Grid item xs={12} sm={6} md={3}>
+            <Button variant="outlined" onClick={clearFilters} sx={{ mt: 0.5 }}>
+              Clear Filters
+            </Button>
+          </Grid>
+        </Grid>
         <Paper
           variant="outlined"
           sx={{ width: "100%", mt: 2, overflowX: "auto" }}
         >
-          {getRows().length === 0 ? (
+          {filteredRows().length === 0 ? (
             <Typography sx={{ p: 4 }} color="text.secondary">
-              No {activeName.toLowerCase()} records yet.
+              {getRows().length === 0
+                ? `No ${activeName.toLowerCase()} records yet.`
+                : "No matching records."}
             </Typography>
           ) : (
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -311,7 +462,7 @@ const RawMaterialStockList = () => {
                 </tr>
               </thead>
               <tbody>
-                {getRows().map((record) => (
+                {filteredRows().map((record) => (
                   <tr key={record.id}>
                     {columnsFor(activeName).map((column) => (
                       <td

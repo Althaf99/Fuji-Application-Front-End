@@ -12,6 +12,7 @@ const styles = ({ location }) => {
 `;
 
 const home = getNavItemStyle("/dashboard");
+const finance = getNavItemStyle("/finance");
 const deliveryNote = getNavItemStyle("/deliveryNote");
 const invoice = getNavItemStyle("/invoice");
 const excess = getNavItemStyle("/excess");
@@ -26,6 +27,7 @@ const addItems = getNavItemStyle("/addItems");
 
   return {
     home,
+    finance,
     deliveryNote,
     invoice,
     excess,

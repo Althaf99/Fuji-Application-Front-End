@@ -17,6 +17,7 @@ import { DeliveryNotePrinter } from "../../components/Printers/DeliveryNotePrint
 import AddItems from "../../pages/AddItems";
 import ListExcess from "../../pages/Excess";
 import Dashboard from "../../pages/Dashboard";
+import Finance from "../../pages/Finance";
 import LoginForm from "../../pages/Login";
 
 import { ExcessSheetPrinter } from "../Printers/ExcessSheetPrinter";
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Route path="/" element={<LoginForm />} />
         <Route path="/" element={<SideNavBar />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="finance" element={<Finance />} />
           <Route path="purchaseOrder" element={<ListPurchaseOrder />} />
           <Route path="invoice" element={<ListInvoice />} />
           <Route path="invoicePrinter" element={<InvoicePrinter />} />

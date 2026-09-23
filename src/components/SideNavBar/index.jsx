@@ -18,6 +18,7 @@ import CloudSyncOutlinedIcon from "@mui/icons-material/CloudSyncOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import { Grid } from "@material-ui/core";
 
 import styles from "./styles.js";
@@ -95,6 +96,28 @@ const SideNavBar = () => {
                   </ListItemIcon>
                   <ListItemText
                     primary="Dashboard"
+                    primaryTypographyProps={{
+                      fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <Divider />
+            <List style={{ paddingBottom: "20px", paddingTop: "10px" }}>
+              <Link
+                to="/finance"
+                className={`${classes.link} ${
+                  location.pathname === "/finance" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem sx={cls.finance}>
+                  <ListItemIcon>
+                    <AccountBalanceWalletOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Finance"
                     primaryTypographyProps={{
                       fontSize: "18px",
                       fontWeight: "440px",

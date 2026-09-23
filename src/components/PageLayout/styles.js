@@ -5,28 +5,28 @@ const styles = (theme) => {
     flex-direction: column;
     flex-wrap: nowrap;
   `;
+
   const headingTitle = css`
     font-family: Nunito !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     font-style: normal !important;
-    line-height: 41px !important;
-    font-weight: 500;
-    font-size: 25px !important;
-    line-height: 48px;
-    color: white;
+    font-size: 1.6rem !important;
+    line-height: 1.5 !important;
+    color: ${theme.palette.common.white};
   `;
+
   const helperTextSection = css`
     padding-top: 15px;
   `;
+
   const section = css`
-    padding-top: 30px;
+    padding-top: 24px;
   `;
 
   const paper = css`
     border-radius: 8px;
-    box-shadow: 0 0 0.5em 0 #bf3131;
-    font-size: 5px;
-    padding: 4px 15px 4px 15px;
+    box-shadow: 0 8px 20px rgba(0, 24, 71, 0.08);
+    padding: 12px 16px;
     background-color: #bf3131;
     width: 100%;
   `;

@@ -1,10 +1,10 @@
 import { createTheme } from "@material-ui/core/styles";
+import { brandColors, radii, shadows } from "./sharedStyles";
 
-const randoliBlue = "rgba(0, 24, 71, 1)"; // HEX - #001847
-const randoliBlue2 = "rgba(15, 94, 247, 1)"; // HEX - #0f5ef7
-// const randoliBlue3 = 'rgba(65, 152, 253, 1)';
-const randoliBlue4 = "rgba(181, 189, 233, 1)"; // HEX - #b5bde9
-const randoliAsh = "rgba(128, 140, 163, 1)"; // HEX - #808ca3
+const randoliBlue = brandColors.navy;
+const randoliBlue2 = brandColors.blue;
+const randoliBlue4 = brandColors.blueTint;
+const randoliAsh = brandColors.ash;
 
 const ThemeDefault = createTheme({
   overrides: {
@@ -33,8 +33,8 @@ const ThemeDefault = createTheme({
     },
     MuiAccordion: {
       root: {
-        boxShadow: `0px 1px 8px 0px rgba(20, 46, 110, 0.1)`,
-        borderRadius: "8px !important",
+        boxShadow: shadows.soft,
+        borderRadius: `${radii.sm} !important`,
       },
     },
     MuiTab: {
@@ -99,6 +99,7 @@ const ThemeDefault = createTheme({
         height: "40px",
         borderRadius: "4px",
         textTransform: "uppercase",
+        transition: "all 0.2s ease",
         "&:hover": {
           backgroundColor: `${randoliBlue2}`,
         },
@@ -106,9 +107,9 @@ const ThemeDefault = createTheme({
       contained: {
         fontFamily: "Nunito",
         fontStyle: "normal",
-        fontWeight: "bold",
+        fontWeight: 700,
         fontSize: "14px",
-        color: "white",
+        color: brandColors.white,
         backgroundColor: `${randoliBlue2}`,
       },
     },

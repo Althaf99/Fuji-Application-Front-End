@@ -202,7 +202,7 @@ const SideNavBar = () => {
                     : ""
                 }`}
               >
-                <ListItem sx={cls.stock}>
+                <ListItem sx={cls.rawMaterialStock}>
                   <ListItemIcon>
                     <ShowChartIcon sx={cls.icon} />
                   </ListItemIcon>

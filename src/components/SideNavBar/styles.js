@@ -6,40 +6,19 @@ const styles = ({ location }) => {
     transition: background-color 0.2s ease;
   `;
 
-  const home = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/dashboard" ? "#118B50" : "white"};
-  `;
+  const getNavItemStyle = (path) => css`
+  ${baseNavItem}
+  background-color: ${location.pathname === path ? "#118B50" : "white"};
+`;
 
-  const deliveryNote = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/deliveryNote" ? "#118B50" : "white"};
-  `;
-
-  const invoice = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/invoice" ? "#118B50" : "white"};
-  `;
-
-  const excess = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/excess" ? "#118B50" : "white"};
-  `;
-
-  const po = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/purchaseOrder" ? "#118B50" : "white"};
-  `;
-
-  const stock = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/stock" ? "#118B50" : "white"};
-  `;
-
-  const addItems = css`
-    ${baseNavItem}
-    background-color: ${location.pathname === "/addItems" ? "#118B50" : "white"};
-  `;
+const home = getNavItemStyle("/dashboard");
+const deliveryNote = getNavItemStyle("/deliveryNote");
+const invoice = getNavItemStyle("/invoice");
+const excess = getNavItemStyle("/excess");
+const po = getNavItemStyle("/purchaseOrder");
+const stock = getNavItemStyle("/stock");
+const rawMaterialStock = getNavItemStyle("/rawMaterialStock");
+const addItems = getNavItemStyle("/addItems");
 
   const icon = css`
     color: #212121;
@@ -54,6 +33,7 @@ const styles = ({ location }) => {
     stock,
     addItems,
     icon,
+    rawMaterialStock
   };
 };
 export default styles;

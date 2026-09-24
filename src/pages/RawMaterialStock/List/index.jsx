@@ -72,7 +72,7 @@ const labels = {
   contactPerson: "Contact Person",
   contactNumber: "Contact Number",
   code: "Code",
-  type: "Type",
+  type: "Brand",
   color: "Color",
   size: "Size",
   price: "Price",
@@ -165,7 +165,7 @@ const RawMaterialStockList = () => {
   const itemDisplay = (item) =>
     item
       ? item.type
-        ? `${item.type} - ${item.color} - ${item.code}`
+        ? `${item.type} - ${item.code} - ${item.color} `
         : `${item.code} - ${item.color}`
       : "";
   const displayValue = (record, key) => {

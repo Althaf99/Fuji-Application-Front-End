@@ -458,7 +458,7 @@ const RawMaterialStockList = () => {
                       {labels[column] || "Available Quantity"}
                     </th>
                   ))}
-                  <th>Actions</th>
+                  <th style={{ textAlign: "left" }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -472,7 +472,7 @@ const RawMaterialStockList = () => {
                         {displayValue(record, column) ?? ""}
                       </td>
                     ))}
-                    <td style={{ padding: 12, borderTop: "1px solid #eee" }}>
+                    <td style={{ borderTop: "1px solid #eee" }}>
                       <Button
                         size="small"
                         onClick={() => openEdit(record)}

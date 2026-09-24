@@ -104,28 +104,7 @@ const SideNavBar = () => {
                 </ListItem>
               </Link>
             </List>
-            <Divider />
-            <List style={{ paddingBottom: "20px", paddingTop: "10px" }}>
-              <Link
-                to="/finance"
-                className={`${classes.link} ${
-                  location.pathname === "/finance" ? classes.activeLink : ""
-                }`}
-              >
-                <ListItem sx={cls.finance}>
-                  <ListItemIcon>
-                    <AccountBalanceWalletOutlinedIcon sx={cls.icon} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Finance"
-                    primaryTypographyProps={{
-                      fontSize: "18px",
-                      fontWeight: "440px",
-                    }}
-                  />
-                </ListItem>
-              </Link>
-            </List>
+
             <Divider />
             <List style={{ paddingBottom: "20px", paddingTop: "10px" }}>
               <Link
@@ -231,6 +210,27 @@ const SideNavBar = () => {
                   </ListItemIcon>
                   <ListItemText
                     primary="Raw Material Stock"
+                    primaryTypographyProps={{
+                      fontSize: "18px",
+                      fontWeight: "440px",
+                    }}
+                  />
+                </ListItem>
+              </Link>
+            </List>
+            <List style={{ paddingBottom: "20px", paddingTop: "10px" }}>
+              <Link
+                to="/finance"
+                className={`${classes.link} ${
+                  location.pathname === "/finance" ? classes.activeLink : ""
+                }`}
+              >
+                <ListItem sx={cls.finance}>
+                  <ListItemIcon>
+                    <AccountBalanceWalletOutlinedIcon sx={cls.icon} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Finance"
                     primaryTypographyProps={{
                       fontSize: "18px",
                       fontWeight: "440px",

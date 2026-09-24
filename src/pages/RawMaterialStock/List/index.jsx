@@ -37,7 +37,7 @@ const emptyForms = {
   },
   "Master Batch": {
     code: "",
-    // type: "",
+    type: "",
     color: "",
     price: "",
   },
@@ -99,7 +99,7 @@ const normalizeGrns = (grns) =>
 const filterFields = {
   Vendor: ["name", "location"],
   "Raw Material": ["type", "color"],
-  "Master Batch": ["code", "color"],
+  "Master Batch": ["code", "type", "color"],
   GRN: ["date", "vendorId", "itemType", "itemId"],
   Consumption: ["itemType", "itemId", "machineNo", "moldNo", "usedBy"],
 };
@@ -195,7 +195,7 @@ const RawMaterialStockList = () => {
     if (tab === "Raw Material")
       return ["code", "type", "color", "price", "availableQuantity"];
     if (tab === "Master Batch")
-      return ["code", "color", "price", "availableQuantity"];
+      return ["code", "type", "color", "price", "availableQuantity"];
     if (tab === "GRN")
       return ["date", "vendorId", "itemType", "itemId", "quantity"];
     return [
